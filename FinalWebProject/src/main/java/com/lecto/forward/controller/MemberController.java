@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.lecto.forward.dto.MemberDTO;
 import com.lecto.forward.service.MemberService;
@@ -68,7 +69,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	/** 관리자 - 회원 추가 */
 	@RequestMapping(value="ad_addmember", method=RequestMethod.POST)
 	public String addMemberPOST(MemberDTO memberDTO, @RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
-			Model model, HttpSession session) throws Exception {
+			RedirectAttributes rda, HttpSession session) throws Exception {
 		
 		String sessionId = "admin";
 		//String sessionId = (String) session.getAttribute("login");
@@ -76,26 +77,26 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			
 			memberDTO.setMemberPhone("010"+tel2+tel3);
 			if(memberService.addMember(memberDTO)){
-				model.addAttribute("msg", "SUCCESS");
+				rda.addFlashAttribute("msg", "SUCCESS");
 				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SUCCESS");
 			} else {
-				model.addAttribute("msg", "FAIL");
+				rda.addFlashAttribute("msg", "FAIL");
 				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@FAIL");
 			}
 		} else{
-			model.addAttribute("msg", "FAIL");
+			rda.addFlashAttribute("msg", "FAIL");
 		}
 		return "redirect:/ad_memberlist";
 	}
 	
 	/** 관리자 - 회원 정보 수정으로 가기 */
 	@RequestMapping(value="ad_editmember", method=RequestMethod.GET)
-	public String updateMemberGET(@RequestParam("memberId")String memberId, Model model, HttpSession session) {
+	public String updateMemberGET(@RequestParam("memId")String memId, Model model, HttpSession session) {
 		
 		String sessionId = "admin";
 		//String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
-			MemberDTO member = memberService.searchMember(memberId);
+			MemberDTO member = memberService.searchMember(memId);
 			model.addAttribute("member", member);
 			model.addAttribute("tel2", member.getMemberPhone().substring(3,7));
 			model.addAttribute("tel3", member.getMemberPhone().substring(7));
@@ -106,20 +107,21 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	/** 관리자 - 회원 정보 수정 */
 	@RequestMapping(value="/ad_editmember", method=RequestMethod.POST)
 	public String updateMemberPOST(MemberDTO memberDTO, @RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
-			Model model, HttpSession session) throws Exception {
+			RedirectAttributes rda, HttpSession session) throws Exception {
 		String sessionId = "admin";
 		//String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			memberDTO.setMemberPhone("010"+tel2+tel3);
+			System.out.println(memberDTO.getMemberId());
 			if(memberService.updateMember(memberDTO)){
-				model.addAttribute("msg", "SUCCESS");
+				rda.addFlashAttribute("msg", "SUCCESS");
 				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SUCCESS");
 			} else {
-				model.addAttribute("msg", "FAIL");
+				rda.addFlashAttribute("msg", "FAIL");
 				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@FAIL");
 			}
 		} else{
-			model.addAttribute("msg", "FAIL");
+			rda.addFlashAttribute("msg", "FAIL");
 		}
 		return "redirect:/ad_memberlist";
 	}

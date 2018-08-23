@@ -23,7 +23,7 @@
 		     $form.attr('action', '/ad_editmember');
 		     $form.attr('method', 'get');
 		     $form.appendTo('body');
-		     var memId = '<input type="hidden" value="' + id + '" name="memberId">';
+		     var memId = '<input type="hidden" value="' + id + '" name="memId">';
 		     $form.append(memId);
 		     $form.submit();
 		}); 

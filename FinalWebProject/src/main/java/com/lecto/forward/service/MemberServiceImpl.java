@@ -118,6 +118,7 @@ public class MemberServiceImpl implements MemberService{
 			return false;
 		}
 		try {		
+			System.out.println(memberDTO.toString());
 			memberMapper.updateMember(memberDTO);
 			return true;
 		}catch(Exception e) {

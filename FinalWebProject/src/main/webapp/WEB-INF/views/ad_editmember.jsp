@@ -11,7 +11,7 @@
 $(document).ready(function(e){
 	$('#btnSubmit').click(function(e){
 		var id = $("#memberId").val();
-		alert(id+'+++++++++');
+		alert(id);
 		
 		var form = $('.mainForm');
 		form.attr('method', 'post');

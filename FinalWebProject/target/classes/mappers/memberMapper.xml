@@ -37,7 +37,8 @@
 	 </insert>
 	 
 	 <update id="updateMember">
-	 	update member_tb set member_pwd = #{memberPwd}, member_name = #{memberName},
+	 	update member_tb set
+	 	member_pwd = #{memberPwd}, member_name = #{memberName},
 	 	member_nickname = #{memberNickname}, member_birth = #{memberBirth}, member_mail = #{memberMail}, 
 	 	member_phone = #{memberPhone}, member_address = #{memberAddress}
 	 	where member_id = #{memberId}
