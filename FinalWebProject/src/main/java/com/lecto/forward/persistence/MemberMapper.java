@@ -33,7 +33,7 @@ public interface MemberMapper {
 	/** 아이디에 맞는 회원의 정보들 삭제 */
 	public int deleteMembers(ArrayList<String> memberIds) throws Exception;	
 	/** 아이디와 비밀번호 일치하면 아이디 리턴 */
-	public MemberDTO login(@Param("memberId")String memberId, @Param("memberPwd")String memberPwd) throws Exception;
+	public MemberDTO login(@Param("memberId")String memberId) throws Exception;
 	/** 아이디 일치하는 아이디 리턴 */
 	public MemberDTO searchId(String memberId) throws Exception;
 	/** 모든 회원 리턴 */
@@ -58,4 +58,10 @@ public interface MemberMapper {
 	public int emailCheck(String memberMail)throws Exception;
 	/** 폰번호중복검사(비동기)*/
 	public int phoneCheck(String memberPhone)throws Exception;
+	/** 닉네임중복검사(비동기)*/
+	public int nicknameCheck(String memberNickname) throws Exception;
+	/** 아이디찾기(비동기)*/
+	public int findId(@Param("memberName")String memberName, @Param("memberPhone")String memberPhone, @Param("memberMail")String memberMail)throws Exception;
+	/** 비밀번호찾기(비동기)*/
+	public int findPwd(@Param("memberId")String memberId, @Param("memberPhone")String memberPhone, @Param("memberMail")String memberMail) throws Exception;
 }

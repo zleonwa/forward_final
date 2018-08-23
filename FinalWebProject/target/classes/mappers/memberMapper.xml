@@ -96,8 +96,6 @@
 		select <include refid="columns" />
 		from member_tb
 		where member_id = #{memberId}
-		and
-		member_pwd = #{memberPwd}
 	</select>
 	
 	<select id="searchId" resultMap="member">
@@ -210,5 +208,20 @@
 	<select id="phoneCheck" parameterType="String" resultType="INTEGER">
 		SELECT COUNT(*) FROM member_tb
 		WHERE member_phone =#{memberPhone}
+	</select>
+	
+	<select id="nicknameCheck" parameterType="String" resultType="INTEGER">
+		SELECT COUNT(*) FROM member_tb
+		WHERE member_nickname =#{memberNickname}
+	</select>
+	
+	<select id="findId" parameterType="String" resultType="INTEGER">
+		SELECT COUNT(*) FROM member_tb
+		WHERE member_name =#{memberName} AND member_phone = #{memberPhone} AND member_mail=#{memberMail}
+	</select>
+	
+	<select id="findPwd" parameterType="String" resultType="INTEGER">
+		SELECT COUNT(*) FROM member_tb
+		WHERE member_id =#{memberId} AND member_phone=#{memberPhone} AND member_mail=#{memberMail}
 	</select>
 </mapper>

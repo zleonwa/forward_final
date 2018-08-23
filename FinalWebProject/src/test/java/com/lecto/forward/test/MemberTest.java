@@ -156,7 +156,7 @@ public class MemberTest {
 	@Test
 	public void loginTest() {
 		try {
-			System.out.println(memberMapper.login("aaa4","aaa"));
+			System.out.println(memberMapper.login("aaa4"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

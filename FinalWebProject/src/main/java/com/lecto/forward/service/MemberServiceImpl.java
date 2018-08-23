@@ -203,14 +203,33 @@ public class MemberServiceImpl implements MemberService{
 		return true;
 	}
 	
+	/** 로그인 */
+	public MemberDTO login(String memberId) {
+		MemberDTO memberDTO=null;
+		try {
+			memberDTO =  memberMapper.login(memberId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return memberDTO;
+	}
+
+	/** 로그인 부분 수정됨 */
 	public MemberDTO searchMember(String memberId, String memberPwd) {
 		if( !nullCheck(new String[]{memberId, memberPwd})){
 			return null;
 		}
 		MemberDTO dto = null;
+		MemberDTO loginMemberDTO = null;
 		try {
-			dto = memberMapper.login(memberId, memberPwd);
-			return dto;
+			dto = memberMapper.searchId(memberId);
+			if(dto!=null) {
+				if(dto.getMemberPwd().equals(memberPwd)) {
+					loginMemberDTO = memberMapper.login(memberId);
+				}
+			}
+			return loginMemberDTO;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -533,8 +552,25 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int phoneCheck(String memberPhone) throws Exception{
 		return memberMapper.phoneCheck(memberPhone);
-		
 	}
+	
+	@Override
+	public int nicknameCheck(String memberNickname) throws Exception{
+		return memberMapper.nicknameCheck(memberNickname);
+	}
+	
+	/**아이디찾기(비동기)*/
+	@Override
+	public int findId(String memberName, String memberPhone, String memberMail) throws Exception {
+		System.out.println("aa"+memberName);
+		return memberMapper.findId(memberName, memberPhone, memberMail);
+	}
+	
+	public int findPwd(String memberId, String memberPhone, String memberMail) throws Exception{
+		System.out.println(memberMapper.findPwd(memberId, memberPhone, memberMail));
+		return memberMapper.findPwd(memberId, memberPhone, memberMail);
+	}
+	
 	public boolean nullCheck(String[] str)
 	{
 		if(str == null){return false;}

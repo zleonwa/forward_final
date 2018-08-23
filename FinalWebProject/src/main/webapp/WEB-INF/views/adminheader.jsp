@@ -46,7 +46,7 @@ $(document).ready(function(e){
 	        <li style="font-weight:bold;font-size:12pt;"><a href="#" id="memberList">회원 관리</a></li>
 	        <li style="font-weight:bold;font-size:12pt;"><a href="#" id="managerList">운영자 관리</a></li>
 	        <li style="font-weight:bold;font-size:12pt;"><a href="/ad_admininfo">관리자 정보</a></li>
-	        <li><a href="./index" class="pull-right" style="font-weight:bold;font-size:12pt;">로그아웃</a></li>
+	        <li><a href="/logout" class="pull-right" style="font-weight:bold;font-size:12pt;">로그아웃</a></li>
 	      </ul>
 	    </div>
 </body>
