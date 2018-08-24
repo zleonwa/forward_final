@@ -152,7 +152,7 @@ img.emoji {
 				<!-- .리스트 -->
 								<!-- 글쓰기 버튼 -->
 				<div class="basic_btnbx">
-					<a href="#" class="basic_btn"><span class="text">회원 정보 수정</span></a>
+					<a href="/m_modify" class="basic_btn"><span class="text">회원 정보 수정</span></a>
 				</div>
 				<!--. 글쓰기 버튼 -->
 				
