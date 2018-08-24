@@ -17,7 +17,7 @@ public class BoardMemberListViewTest {
 	@Autowired
 	private BoardMemberListViewMapper mapper;
 	
-	@Test
+	/*@Test
 	public void searchBoardCodetest() {
 		try {
 			List<BoardMemberListVO> list = mapper.searchBoardCode("bo2");
@@ -41,7 +41,7 @@ public class BoardMemberListViewTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 /*	@Test
 	public void searchBCMemberIdtest() {
@@ -103,7 +103,7 @@ public class BoardMemberListViewTest {
 		}
 	}
 	
-	@Test
+/*	@Test
 	public void searchBNGradeNametest() {
 		try {
 			List<BoardMemberListVO> list = mapper.searchBNGradeName("자유게시판","가");
@@ -114,6 +114,6 @@ public class BoardMemberListViewTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 }

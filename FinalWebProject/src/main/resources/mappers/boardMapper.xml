@@ -46,7 +46,7 @@
 	</update>
 	
 	<update id="updateBoard">
-		update board_tb set board_name=#{boardName}, gradeup_date=#{gradeUpDate}, theme_code=#{themeCode}
+		update board_tb set board_name=#{boardName}, gradeup_date=#{gradeUpDate}
 		where board_code = #{boardCode}
 	</update>
 	

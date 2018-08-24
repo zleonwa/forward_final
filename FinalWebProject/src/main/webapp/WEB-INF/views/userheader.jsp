@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page session="true"%>
 <html>
 <head>
 	<meta charset="UTF-8">
@@ -8,7 +10,13 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
-		<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
+		<script>
+		(function(html){
+			html.className = html.className.replace(/\bno-js\b/,'js')
+			})(document.documentElement);
+		
+		
+		</script>
 <title>Smash Sports Matching</title>
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
@@ -28,35 +36,42 @@ img.emoji {
 	background: none !important;
 	padding: 0 !important;
 }
+#logout{
+	color:white;
+	font-family: 'Nanum Gothic','Open Sans', sans-serif;
+     font-size: 14px;
+     width:60px;
+	cursor:pointer;
+}
+
+
+
 </style>
-<link rel='stylesheet' id='dashicons-css'  href='./css/dashicons.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='post-views-counter-frontend-css'  href='./css/frontend.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='./resources/css/dashicons.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='post-views-counter-frontend-css'  href='./resources/css/frontend.css?ver=4.7.3' type='text/css' media='all' />
 <link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
-<link rel='stylesheet' id='genericons-css'  href='./css/genericons.css?ver=3.4.1' type='text/css' media='all' />
-<link rel='stylesheet' id='twentysixteen-style-css'  href='./css/styleSmash.css?ver=4.7.3' type='text/css' media='all' />
-<link rel='stylesheet' id='jquery-ui-css'  href='./jquery-ui.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='unslider-css'  href='./unslider.css' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='./resources/css/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='./resources/css/styleSmash.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-ui-css'  href='./resources/jquery-ui.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='unslider-css'  href='./resources/unslider.css' type='text/css' media='all' />
 <!--[if lt IE 9]>
 <script type='text/javascript' src='./js/html5'></script>
 <![endif]-->
-<script type='text/javascript' src='./js/jquerySmash.js'></script>
-<script type='text/javascript' src='./js/jquery-migrate.min.js'></script>
+<script type='text/javascript' src='./resources/js/jquerySmash.js'></script>
+<script type='text/javascript' src='./resources/js/jquery-migrate.min.js'></script>
 <script type='text/javascript' src='//code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
-<script type='text/javascript' src='./js/unslider.js'></script>
-<link rel="alternate" type="text/xml+oembed" href="./json/embed.json" />
-<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<script type='text/javascript' src='./resources/js/unslider.js'></script>
+<link rel="alternate" type="text/xml+oembed" href="./resources/json/embed.json" />
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}
+</style>
 	<link rel="stylesheet" href="http://gangwon-fc.com/wp-content/themes/gangwonfc/css/template.css?20170607" type="text/css" media="all">
-	<link rel="stylesheet" href="./css/metabrain-editor.css" type="text/css" media="all">
-	<script type="text/javascript" src="./js/common.js"></script>
+	<link rel="stylesheet" href="./resources/css/metabrain-editor.css" type="text/css" media="all">
+	<script type="text/javascript" src="./resources/js/common.js"></script>
 </head>
 <body>
+
 <div id="masthead" class="site-header" role="banner"><!-- site-header-menu 영역 호버시 nav_on 클래스 적용   .search_btn 클릭시 search_on 클래스 적용-->
 			<div class="hover_bg"></div>
-			<!-- 데이터 -->
-			<form role="form" action="/m_board" method="POST" id="boardSelect">
-				<input type="hidden" name="boardCode" value="bo2">
-			</form>
-			<!-- 데이터 -->
 			<!-- 서치박스 -->
 			<div class="head_searchbx">
 				<div class="max_container">
@@ -84,11 +99,20 @@ img.emoji {
 					<!-- 링크박스 -->
 					<div class="head_linkbx">
 						<ul>
-							<li><a href="login.jsp">LOGIN</a></li>
-							<li><a href="signup.jsp">JOIN</a></li>
+							<c:if test="${empty sessionScope.login}">
+							<li><a href="/login">LOGIN</a></li>
+							<li><a href="/m_signup">JOIN</a></li>
+							</c:if>
+							
+							<c:if test="${not empty sessionScope.login}">
+							<li><a href="/m_mypage"><c:out value="${sessionScope.login}"/>님 환영합니다.</a></li>
+							
+							<li><a href="/logout">LOGOUT</a></li>
+							</c:if>
 						</ul>
 					</div>
 					<!-- .링크박스 -->
+					
 				</div>
 			</div>
 			<!-- .상단헤더 -->
@@ -102,8 +126,8 @@ img.emoji {
 							<li class="nav_greatu menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-91">
 							<a href="index.jsp">Home</a>
 							<ul class="sub-menu">
-								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92 board" id="bo1"><a href="#">공지사항</a></li>
-								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-95 board"><a href="#">자유게시판</a></li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92"><a href="noticeboard.jsp">공지사항</a></li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-95"><a href="m_board.jsp">자유게시판</a>
 									<ul class="sub-menu">
 										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7014"><a href="#">Q&#038;A</a></li>
 								</ul>
@@ -153,7 +177,7 @@ img.emoji {
 </li>
 <li class="nav_quick menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1161"><a href="#;">Quick Menu</a>
 <ul class="sub-menu">
-	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-123"><a target="_blank" href="#">고객센터</a></li>
+	<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-123"><a target="_blank" href="">고객센터</a></li>
 </ul>
 </li>
 </ul></div>								</nav><!-- .main-navigation -->
@@ -164,51 +188,25 @@ img.emoji {
 			<!-- .하단헤더 -->
 		</div>
 <!-- .헤더 -->
+
+
+
+
 </body>
-</html>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
 <script>
-jQuery(document).ready(function($){
-	/* 동적으로 생성된 게시판의 class에 board를 넣어줘 */
-	$(".board").on("click", function(e){
-		// 누른 게시판의 boardCode를 가져옴
-		var boardCode = $(this).attr('id');
-		//hidden으로 넣어둔 inputbox에 value를 게시판의 boardCode로 set
-		$("input[name='boardCode']").val(boardCode)
-		$("#boardSelect").submit();
-		/* $.ajax({
-			url:"/m_board",
-			data: {boardCode : $(this).attr('id')},
-			success: function(data){
-				consone.log("성공");
-			},
-			error: function(xhr, status, error) {
-	            alert("실패");
-	        }  
-		}); */
+/* jQuery(document).ready(function(){
+	
+	jQuery('#logout').click(function(){
+		alert("로그아웃됨");
+		location.href = "logout.jsp";
 		
 	});
 	
-/* 	$('.board').submit(function(e){
-		$.ajax({
-			url: $form.attr('action'),
-			type: 'POST',
-			data: $form.serialize(),
-			success: function(data){
-
-			}
-		});
-	});  */
+}); */
 
 	
-	/*  $('.board').submit(function(e){
-		$.ajax({
-			url: $form.attr('action'),
-			type: 'POST',
-			data: $form.serialize(),
-			console.log("gg");
-			alert("hi");
-		});
-	});  */
-});
 </script>
+
+</html>

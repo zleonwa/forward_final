@@ -11,7 +11,7 @@
 $(document).ready(function(e){
 	$('#btnSubmit').click(function(e){
 		var id = $("#memberId").val();
-		alert(id+'+++++++++');
+		alert(id);
 		
 		var form = $('.mainForm');
 		form.attr('method', 'post');
@@ -48,6 +48,9 @@ $(document).ready(function(e){
 			  <h4 style="font-weight:bold;">회원 수정</h4>
 			  <br>
 				<form class="mainForm" method="post">
+				<input type="hidden" name="page" value="${cri.page }"/>
+				<input type="hidden" name="perPageNum" value="${cri.perPageNum }"/>
+					
 				<div class="form-group row">
 				    <label class="col-sm-2 col-form-label" for="memberId">아이디</label>
 				    <input id="memberId" name="memberId" type="text" class="input-sm" placeholder="2~15자" value="${member.memberId }" readonly>

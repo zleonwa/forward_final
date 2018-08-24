@@ -47,9 +47,7 @@ img.emoji {
 <link rel='stylesheet' id='twentysixteen-style-css'  href='./css/styleSmash.css?ver=4.7.3' type='text/css' media='all' />
 <link rel='stylesheet' id='jquery-ui-css'  href='./jquery-ui.min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='unslider-css'  href='./unslider.css' type='text/css' media='all' />
-<!--[if lt IE 9]>
-<script type='text/javascript' src='./js/html5'></script>
-<![endif]-->
+
 <script type='text/javascript' src='./js/jquerySmash.js'></script>
 <script type='text/javascript' src='./js/jquery-migrate.min.js'></script>
 <script type='text/javascript' src='//code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
@@ -63,6 +61,7 @@ img.emoji {
 
 <body class="page-template page-template-templates page-template-login page-template-templateslogin-php page page-id-300 group-blog">
 <!-- <div class="site_wrap">모바일 메뉴 버튼 클릭시 m_nav_on 클래스 적용 -->
+
 <div id="page" class="site">
 	<div class="site-inner">
 		<div id="content" class="site-content">
@@ -75,10 +74,9 @@ img.emoji {
 						<!-- 컨텐츠 시작 -->
 						<!-- 리스트 -->
 						<div class="form_listbx login">
-							<form name="form_login"  action="#" method="POST">
-								<input type="hidden" name="action" value="a_user_login"/>
-								<input type="hidden" name="nonce" value="a1750b6477"/>
-								<input type="hidden" name="rurl" value=""/>
+						
+							<form name="form_login"  action="login" method="POST">
+							<input type="hidden" name="job" value="login"/>		
 								<div class="container" style="height:130px;"><br/></div>
 								<div class="form_container">
 									<h3><span class="icon_text" style="color:gray">LOGIN</span></h3>
@@ -86,7 +84,8 @@ img.emoji {
 									<div class="form_itembx">
 										<div class="inputbx">
 											<label class="hidden_label" for="login_10">아이디</label>
-											<input id="login_10" type="text" class="text_inputbx" placeholder="아이디" name="user_login" data-validation="required">
+											<input id="memberId" type="text" class="text_inputbx" placeholder="아이디" name="memberId" data-validation="required">
+											
 											<p class="form_allet error alert_error" style="display:none" data-input-name="user_login"></p>
 										</div>
 									</div>
@@ -95,7 +94,7 @@ img.emoji {
 									<div class="form_itembx">
 										<div class="inputbx">
 											<label class="hidden_label" for="login_11">비밀번호</label>
-											<input id="login_11" type="password" class="text_inputbx" placeholder="비밀번호" name="password" data-validation="required">
+											<input id="memberPwd" type="password" class="text_inputbx" placeholder="비밀번호" name="memberPwd" data-validation="required">
 											<p class="form_allet error alert_error" style="display:none" data-input-name="password"></p>
 										</div>
 									</div>
@@ -106,8 +105,8 @@ img.emoji {
 									</div>
 									<div class="form_linkbx">
 										<ul>
-											<li><span class="text">*아이디와 비밀번호를 잊으셨나요?</span><a href="#" class="btn gray">id/pw 찾기</a></li>
-											<li><span class="text">*회원이 아니신가요?</span><a href="signup.jsp" class="btn orange">회원가입</a></li>
+											<li><span class="text">*아이디와 비밀번호를 잊으셨나요?</span><a href="/find_id_pwd" class="btn gray">id/pw 찾기</a></li>
+											<li><span class="text">*회원이 아니신가요?</span><a href="m_signup.jsp" class="btn orange">회원가입</a></li>
 										</ul>
 									</div>
 								</div>
@@ -125,20 +124,11 @@ img.emoji {
 
 <script type="text/javascript">
 jQuery(document).ready(function($){
-	$('#loginBtn').click(function(e){
-		if($('#login_10').val() == "admin1"){
-			location.replace('adminmain.jsp');
-		}else if($('#login_10').val() == "user1"){
-			location.replace('successLoginIndex.jsp');
-		}else{
-			alert("아이디나 비밀번호를 확인해 주세요.");
-			$('#login_10').val('');
-			$('#login_11').val('');
-		}
-	});	
 	
-	var $form =  $('form[name="form_login"]');
+	
+/* 	 var $form =  $('form[name="form_login"]');
 	$form.submit(function(e){
+		
 		e.stopPropagation();
 	
 		e.preventDefault();
@@ -150,51 +140,27 @@ jQuery(document).ready(function($){
 			return false;
 		}
 		
+		//맞으면 ajax를 사용해서 사용자를 로그인 시키고 로그인한 회원의 정보를 메인 화면에 보여준다.
+		var memberId=$('#memberId').val();
+		var memberPwd=$('#memberPwd').val();
 	
-		
-	
-
-		/* $.ajax({
-			url: self.attr('action'),
-			type: 'POST',
-			data: $form.serialize(),
+		 $.ajax({
+			
+			type: "POST",
+			url: ""
+			data: {"memberId":memberId,"memberPwd":memberPwd},
 			success: function(data){
-				if($('#login_10').val().equals("abc1234")){
-					location.replace("successLoginIndex.jsp");
-				}else if(('#login_10').val().equals("dami1234")){
-					location.replace("adminmain.jsp");
+				if(data=="True"){
+					alert("aa");
+				}else if(data=="False"){
+					alert("bb");
 				}
-				
-				if(data.success){
-					if(data.res_link){
-						location.href=data.res_link;
-					}
-					else {
-						location.href='/';
-					}
-				}
-				else {
-					if(data.error_code == 3){
-						// validation error
-						// 정상적으로 자바스크립트에서 미리 처리함.
-						// 스크립트 수정하여 입력한 경우를 대비하여 저장단계 error 발생
-						if(data.validation){
-							$.each(data.validation, function(inputName, value){
-								self.find('.alert_error[data-input-name~="'+inputName+'"]').show().text(value['msg']);
-							});
-
-							scrollToErrorMsg();
-						}
-
-						alert(data.error_msg);
-					}
-					else if(data.error_msg){
-						alert(data.error_msg);
-					}
-				}
+			
 			}	
-		}); */
-	});
+		}); 
+	}); */
+	
+	
 });
 </script>
 		</div><!-- .site-content -->

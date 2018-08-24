@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <%@ include file="userheader.jsp" %>
@@ -14,7 +15,7 @@
 <title>Smash Sports Matching</title>
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
-<style type="text/css">
+<style type="text/css">`
 img.wp-smiley,
 img.emoji {
 	display: inline !important;
@@ -40,19 +41,18 @@ img.emoji {
 	padding: 0 0 0 87%;
 }
 </style>
-<link rel='stylesheet' id='dashicons-css'  href='/resources/css/dashicons.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='post-views-counter-frontend-css'  href='/resources/css/frontend.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='./resources/css/dashicons.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='post-views-counter-frontend-css'  href='./resources/css/frontend.css?ver=4.7.3' type='text/css' media='all' />
 <link rel='stylesheet' id='twentysixteen-fonts-css'  href='https://fonts.googleapis.com/css?family=Montserrat%3A400%2C700%7CInconsolata%3A400&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
-<link rel='stylesheet' id='genericons-css'  href='/resources/css/genericons.css?ver=3.4.1' type='text/css' media='all' />
-<link rel='stylesheet' id='twentysixteen-style-css'  href='/resources/css/styleSmash.css?ver=4.7.3' type='text/css' media='all' />
-<link rel='stylesheet' id='jquery-ui-css'  href='/resources/jquery-ui.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='unslider-css'  href='/resources/unslider.css' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='./resources/css/genericons.css?ver=3.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='twentysixteen-style-css'  href='./resources/css/styleSmash.css?ver=4.7.3' type='text/css' media='all' />
+<link rel='stylesheet' id='jquery-ui-css'  href='./resources/jquery-ui.min.css' type='text/css' media='all' />
+<link rel='stylesheet' id='unslider-css'  href='./resources/unslider.css' type='text/css' media='all' />
 <!--[if lt IE 9]>
 <script type='text/javascript' src='./js/html5'></script>
 <![endif]-->
 <script type='text/javascript' src='./resources/js/jquerySmash.js'></script>
 <script type='text/javascript' src='./resources/js/jquery-migrate.min.js'></script>
-<script type='text/javascript' src='//code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
 <script type='text/javascript' src='./resources/js/unslider.js'></script>
 <link rel="alternate" type="text/xml+oembed" href="./resources/json/embed.json" />
 <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
@@ -62,7 +62,7 @@ img.emoji {
 </head>
 
 <body class="home page-template-default page page-id-6 group-blog">
-
+<input type="hidden" name="job" value="index">
 <div id="page" class="site">
 	<div class="mobile_nav_onbg"></div>
 	<div class="site-inner">
@@ -83,7 +83,7 @@ img.emoji {
 									<li class="active">
 					<div class="slide_itembx">
 						<div class="bg"></div>
-						
+						<div class="slide_bg" style="background: url('') no-repeat;background-attachment: fixed;background-position: center top;background-size: cover"></div>
 						<div class="text_itembx">
 							<div class="max_container">
 								<h2 class="delay_1 ani_left">SMASH</h2>
@@ -396,427 +396,7 @@ img.emoji {
 	<!-- .team Ranking -->
 </div>
 </div>
-<!-- .메인 컨텐츠 2 -->
 
-<div>
-<div class="home_rowbx five_bx">
-	<div class="sns_slidebx">
-				<ul style="width:3444px;overflow:hidden;">
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://youtu.be/ljf_-U5Wfho" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/jh.png" alt="jg" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=elVRsRJOl7U" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/youtube2.jpg" alt="최종플중" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=QjSMQj0WJpQ" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/hnd.png" alt="호날두" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=Hwa6-tHl5_k" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/hw.png" alt="최종플중" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=Hwa6-tHl5_k" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/youtube3.jpg" alt="최종플중3" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=8tRP9Fc8m0k" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/ping.png" alt="탁구" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=J0I9qCvZZEY" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/rbr.png" alt="농구" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=WcIC51SRpZU" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./resources/images/youtube4.jpg" alt="인생샷" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-			</ul>
-	</div>
-</div>
-
-<script>
-jQuery(document).ready(function($){
-	function resizeVideo(){
-		var width = parseInt( $('.basic_popup .photobx_contbx  iframe').css('width') );
-		var height = width/1.5;
-		$('.basic_popup .photobx_contbx  iframe').css('height', height);
-	}
-	
-	// 영상 보기
-	$('.home_videobx a').click(function(e){
-		$('.basic_popup .photobx_contbx iframe').attr('src', 'https://www.youtube.com/embed/'+$(this).data('youtube-id')+'?autoplay=1');
-		$('.basic_popup').show();
-
-		var pid = $(this).data('post-id');
-		var ptype = $(this).data('post-type');
-		$.ajax({
-			url: 'http://',
-			type: 'POST',
-			data: {
-				action: 'custom-check-post',
-				custom_nonce: '3bf0fdaafc',
-				post_id: pid,
-				post_type: ptype,
-			}
-		});
-
-		resizeVideo();
-	});
-
-	$(window).resize(function(){
-		resizeVideo();
-	});
-
-	$('.basic_popup .close_btn').click(function(){
-		$('.basic_popup .photobx_contbx iframe').attr('src', '');
-		$(this).closest('.basic_popup').hide();
-	});
-
-	// Slider
-	function _slide_next(t){
-		var $active = $(t).closest('.slide_container').find('.slide_ul li.active');
-		var $next = $active.next();
-		var $first = $(t).closest('.slide_container').find('.slide_ul li').first();
-		$active.removeClass('active');
-
-		var $bullet = $('._menu_navbx .slide_bulletbx');
-		var bulletPosition = parseInt($bullet.css('left'));
-		if($next.length){
-			bulletPosition += parseInt($bullet.css('width'));
-			$bullet.animate({
-				left: bulletPosition
-
-			}, 'slow');
-
-			$next.addClass('active');
-		}
-		else if($first.length){
-			$bullet.animate({
-				left: 0
-			}, 'slow');
-
-			$first.addClass('active');
-		}
-	}
-
-	$('.slide_container .next_btn').click(function(){
-		_slide_next($(this));
-	});
-
-	$('.slide_container .prev_btn').click(function(){
-		var $active = $(this).closest('.slide_container').find('.slide_ul li.active');
-		var $prev = $active.prev();
-		var $last = $(this).closest('.slide_container').find('.slide_ul li').last();
-		$active.removeClass('active');
-
-		var $bullet = $('.quick_menu_navbx .slide_bulletbx');
-		var bulletPosition = parseInt($bullet.css('left'));
-
-		if($prev.length){
-			bulletPosition -= parseInt($bullet.css('width'));
-			$bullet.animate({
-				left: bulletPosition
-
-			}, 'slow');
-
-			$prev.addClass('active');
-		}
-		else if($last.length){
-			var windowWidth = $(window).width();
-			$bullet.animate({
-				left: windowWidth-parseInt($bullet.css('width'))
-			}, 'slow');
-			$last.addClass('active');
-		}
-	});
-
-	$('.slide_container .next_btn, .slide_container .prev_btn').on('mouseover', function(){
-		$(this).closest('.slide_container').data('hold', 'yes');
-	});
-
-	$('.slide_container .next_btn, .slide_container .prev_btn').on('mouseout', function(){
-		$(this).closest('.slide_container').data('hold', 'no');
-	});
-
-	setInterval(function(){
-		if($('.slide_container').data('hold') != 'yes')
-			_slide_next($('.slide_container .next_btn'));
-	}, 5000);
-
-	// Scroll
-	$('.scroll_down').click(function(e){
-		e.stopPropagation();
-		e.preventDefault();
-
-		$('html, body').animate({
-			scrollTop: $($(this).attr('href')).offset().top-236 
-		}, 600);
-	});
-
-	// SNS Slider
-	function _sns_slide_next(){
-		var $slider = $('.sns_slidebx ul');
-		if($slider.closest('.sns_slidebx').data('hold') == 'yes')
-			return;
-
-		var $items = $slider.find('li');
-		var itemWidth = parseInt($items.first().css('width'));
-		var sliderLeft = $slider.css('left');
-
-		$slider.css('position', 'relative');
-		$slider.animate({
-			left: "-="+itemWidth,
-		}, 400, function(){
-			$slider.append($items.first().clone());
-			$items.first().remove();
-			$slider.css('left', '+='+itemWidth);
-
-		});
-	}
-
-	$('.sns_slidebx').on('mouseover', function(){
-		$(this).data('hold', 'yes');
-	});
-
-	$('.sns_slidebx').on('mouseout', function(){
-		$(this).data('hold', 'no');
-	});
-
-	setInterval(function(){
-		_sns_slide_next();
-	}, 3000);
-
-	function _display_time(time){
-		if(parseInt(time) < 10){
-			time = '0'+time;
-		}
-		return time;
-	}
-
-	// Timer
-	setInterval(function(){
-		var $ticket_bx = $('.home_ticket_bx');
-
-		var $day = $ticket_bx.find('.count_timebx .time_day');
-		var $hour = $ticket_bx.find('.count_timebx .time_hour');
-		var $min = $ticket_bx.find('.count_timebx .time_min');
-		var $sec = $ticket_bx.find('.count_timebx .time_sec');
-
-		var descreaseDay = function(ele, i){
-			if(parseInt( ele.text() ) > 0){
-				var nextday = parseInt(ele.text() ) - 1;
-				ele.text( _display_time(nextday) );
-			}
-		}
-
-		var descreaseHour = function(ele, i){
-			if(parseInt( ele.text() ) > 0){
-				var nexthour = parseInt(ele.text() ) - 1;
-				ele.text( _display_time(nexthour) );
-			}
-			else {
-				descreaseDay($day.eq(i), i);
-				ele.text( _display_time(59) );
-			}
-		}
-
-		var decreaseMin = function(ele, i){
-			if(parseInt( ele.text() ) > 0){
-				var nextmin = parseInt(ele.text() ) - 1;
-				ele.text( _display_time(nextmin) );
-			}
-			else {
-				descreaseHour($hour.eq(i), i);
-				ele.text( _display_time(59) );
-			}
-		}
-
-		if($sec.length > 0){
-			for(var i=0;i<$sec.length;i++){
-				if(parseInt( $sec.eq(i).text() ) > 0){
-					var nextsec = parseInt($sec.eq(i).text() ) - 1;
-					$sec.eq(i).text( _display_time(nextsec) );
-				}
-				else {
-					decreaseMin($min.eq(i), i);
-					$sec.eq(i).text( _display_time(59) );
-				}
-			}
-		}
-		
-		
-	}, 1000);
-
-	var sliding = false;
-	var slide_amount = 25;
-
-	function responsiveSlider(){
-		// 위치 초기화
-		$('.player_slidebx ul').attr('data-first-index', 1);
-		$('.player_slidebx ul').css('left', 0);
-		$('.player_slidebx .prev_btn').hide();
-
-		if( parseInt($(window).width() ) <= 720){
-			var itemCount = $('.player_slidebx .slidebx ul li').length;
-			var itemWidth = $('.player_slidebx .slidebx ul li').outerWidth(true);
-
-			$('.player_slidebx .slidebx').css('width', itemWidth*itemCount);
-		}
-		else {
-			$('.player_slidebx .slidebx').css('width', '');
-		}
-
-		if(parseInt($('.player_slidebx .slidebx').css('width')) < 1200){
-			$('.player_slidebx ul').attr('data-last-index', 3);
-			slide_amount = 100/3;
-		}
-		else {
-			$('.player_slidebx ul').attr('data-last-index', 4);
-			slide_amount = 25;	
-		}
-
-		if( parseInt($(window).width() ) > 720){
-
-			var last_index = $('.player_slidebx ul').attr('data-last-index');
-			var $last = $('.player_slidebx ul li[data-index="'+last_index+'"]');
-			var $next = $last.next();
-			if($next.length){
-				$('.player_slidebx .next_btn').show();
-			}
-		}
-	}
-	
-	responsiveSlider();
-	$(window).resize(function(){
-		$('.player_slidebx ul').scrollLeft(0);
-		// $('.player_slidebx ul li').get(0).scrollIntoView();
-		responsiveSlider();
-	});
-
-	$('.player_slidebx .next_btn').on('click', function(){
-		var $self = $(this);
-		var first_index = $('.player_slidebx ul').attr('data-first-index');
-		var last_index = $('.player_slidebx ul').attr('data-last-index');
-		
-		var $last = $('.player_slidebx ul li[data-index="'+last_index+'"]');
-		var $next = $last.next();
-		if($next.length){
-			var leftPos = $('.player_slidebx ul')[0].style.left;
-			if(!leftPos)
-				leftPos = 0;
-			leftPos = parseFloat(leftPos)-slide_amount;
-
-			if(sliding){
-				return ;
-			}
-
-			sliding = true;
-
-			$('.player_slidebx ul').animate({
-				'left': leftPos+'%'
-			}, 500, "linear", function(){
-				$('.player_slidebx ul').attr('data-first-index', parseInt(first_index)+1);
-				$('.player_slidebx ul').attr('data-last-index', parseInt(last_index)+1);
-
-				if(!$next.next().length){
-					$self.hide();
-				}
-
-				// 이전 화살표 보여주기
-				$('.player_slidebx .prev_btn').show();
-
-				sliding = false;
-			});
-		}
-	});
-
-	$('.player_slidebx .prev_btn').on('click', function(){
-		var $self = $(this);
-		var first_index = $('.player_slidebx ul').attr('data-first-index');
-		var last_index = $('.player_slidebx ul').attr('data-last-index');
-
-		var $first = $('.player_slidebx ul li[data-index="'+first_index+'"]');
-		var $prev = $first.prev();
-
-		if($prev.length){
-
-
-			var leftPos = $('.player_slidebx ul')[0].style.left;
-			if(!leftPos)
-				leftPos = 0;
-			leftPos = parseFloat(leftPos)+slide_amount;
-
-			if(sliding){
-				return ;
-			}
-
-			sliding = true;
-
-			$('.player_slidebx ul').animate({
-				'left': leftPos+'%'
-			}, 500, "linear", function(){
-				$('.player_slidebx ul').attr('data-first-index', parseInt(first_index)-1);
-				$('.player_slidebx ul').attr('data-last-index', parseInt(last_index)-1);
-				if(!$prev.prev().length){
-					$self.hide();
-				}
-
-				// 다음 화살표 보여주기
-				$('.player_slidebx .next_btn').show();
-
-				sliding = false;
-			});
-
-		}
-	});
-	
-});
-</script>
 		</div><!-- .site-content -->
 
 		<div id="colophon" class="site-footer" role="contentinfo">
@@ -826,7 +406,6 @@ jQuery(document).ready(function($){
 					<ul>
 						<li><a href="#">개인정보처리방침</a></li>
 						<li><a href="#">이용약관</a></li>
-						<li><a href="#">이메일무단수집거부</a></li>
 					</ul>
 				</div>
 			</div>
@@ -854,9 +433,8 @@ jQuery(document).ready(function($){
 var screenReaderText = {"expand":"\ud558\uc704 \uba54\ub274 \ud655\uc7a5","collapse":"\ud558\uc704 \uba54\ub274 \ucd95\uc18c"};
 /* ]]> */
 </script>
-<script type='text/javascript' src='./resources/js/functions.js'></script>
-<script type='text/javascript' src='./resources/js/kmcis.js'></script>
-<script type='text/javascript' src='./resources/validation.js'></script>
+<!-- <script type='text/javascript' src='./js/functions.js'></script>
+<script type='text/javascript' src='./js/kmcis.js'></script> -->
 </div>
 <!-- 탑버튼 -->
 <a href="#top" class="top_btn">

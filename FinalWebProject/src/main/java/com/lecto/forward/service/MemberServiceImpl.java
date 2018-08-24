@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lecto.forward.dto.BoardDTO;
+import com.lecto.forward.dto.Criteria;
 import com.lecto.forward.dto.MemberDTO;
 import com.lecto.forward.dto.MemberGradesDTO;
 import com.lecto.forward.persistence.BoardMapper;
@@ -118,6 +119,7 @@ public class MemberServiceImpl implements MemberService{
 			return false;
 		}
 		try {		
+			System.out.println(memberDTO.toString());
 			memberMapper.updateMember(memberDTO);
 			return true;
 		}catch(Exception e) {
@@ -202,14 +204,33 @@ public class MemberServiceImpl implements MemberService{
 		return true;
 	}
 	
+	/** 로그인 */
+	public MemberDTO login(String memberId) {
+		MemberDTO memberDTO=null;
+		try {
+			memberDTO =  memberMapper.login(memberId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return memberDTO;
+	}
+
+	/** 로그인 부분 수정됨 */
 	public MemberDTO searchMember(String memberId, String memberPwd) {
 		if( !nullCheck(new String[]{memberId, memberPwd})){
 			return null;
 		}
 		MemberDTO dto = null;
+		MemberDTO loginMemberDTO = null;
 		try {
-			dto = memberMapper.login(memberId, memberPwd);
-			return dto;
+			dto = memberMapper.searchId(memberId);
+			if(dto!=null) {
+				if(dto.getMemberPwd().equals(memberPwd)) {
+					loginMemberDTO = memberMapper.login(memberId);
+				}
+			}
+			return loginMemberDTO;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -218,6 +239,8 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return null;
 	}
+	
+	///////////////////////////////////
 	
 	public MemberDTO searchMember(MemberDTO memberDTO) {
 		if( !nullCheck(new String[]{memberDTO.getMemberId(), memberDTO.getMemberPwd(), memberDTO.getMemberName(), memberDTO.getMemberNickname(),
@@ -304,7 +327,7 @@ public class MemberServiceImpl implements MemberService{
 		return null;
 	}
 	
-	public Object[] searchBoardMember(String boardKey) {
+	public Object[] searchBoardMember(String boardKey, Criteria cri) {
 		Object[] list = null;
 		List<BoardMemberListVO> vos = null;
 		if( !nullCheck(new String[]{boardKey}))
@@ -313,10 +336,10 @@ public class MemberServiceImpl implements MemberService{
 		try{
 			if(boardKey.substring(0, 2).equals("bo")){
 				System.out.println(boardKey);
-				vos = bmlViewMapper.searchBoardCode(boardKey);
+				vos = bmlViewMapper.searchBoardCode(boardKey, cri);
 			}
 			else{
-				vos = bmlViewMapper.searchBoardName(boardKey);
+				vos = bmlViewMapper.searchBoardName(boardKey, cri);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -329,7 +352,7 @@ public class MemberServiceImpl implements MemberService{
 		return list;
 	}
 	
-	public Object[] searchBoardMember(String boardName, String searchWay, String keyword) {
+	public Object[] searchBoardMember(String boardName, String searchWay, String keyword, Criteria cri) {
 		if( !nullCheck(new String[]{boardName,searchWay, keyword}))
 			return null;
 		
@@ -338,13 +361,13 @@ public class MemberServiceImpl implements MemberService{
 		try {
 			switch(searchWay){
 			case "아이디":
-				list = bmlViewMapper.searchBNMemberId(boardName, keyword);
+				list = bmlViewMapper.searchBNMemberId(boardName, keyword, cri);
 				break;
 			case "닉네임":
-				list = bmlViewMapper.searchBNMemberNickname(boardName, keyword);
+				list = bmlViewMapper.searchBNMemberNickname(boardName, keyword, cri);
 				break;
 			case "등급명":
-				obj = searchBoardGradeMebers(boardName, keyword);
+				obj = searchBoardGradeMebers(boardName, keyword, cri);
 				break;
 			}
 			if(list != null && !list.isEmpty()) {
@@ -358,13 +381,13 @@ public class MemberServiceImpl implements MemberService{
 		return obj;
 	}
 	
-	public Object[] searchBoardGradeMebers(String boardName, String gradeName) {
+	public Object[] searchBoardGradeMebers(String boardName, String gradeName, Criteria cri) {
 		if( !nullCheck(new String[]{boardName, gradeName}))
 			return null;
 		Object[] objs = null;
 		List<BoardMemberListVO> list = null;
 		try {
-			list = bmlViewMapper.searchBNGradeName(boardName, gradeName);
+			list = bmlViewMapper.searchBNGradeName(boardName, gradeName, cri);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -532,8 +555,25 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public int phoneCheck(String memberPhone) throws Exception{
 		return memberMapper.phoneCheck(memberPhone);
-		
 	}
+	
+	@Override
+	public int nicknameCheck(String memberNickname) throws Exception{
+		return memberMapper.nicknameCheck(memberNickname);
+	}
+	
+	/**아이디찾기(비동기)*/
+	@Override
+	public int findId(String memberName, String memberPhone, String memberMail) throws Exception {
+		System.out.println("aa"+memberName);
+		return memberMapper.findId(memberName, memberPhone, memberMail);
+	}
+	
+	public int findPwd(String memberId, String memberPhone, String memberMail) throws Exception{
+		System.out.println(memberMapper.findPwd(memberId, memberPhone, memberMail));
+		return memberMapper.findPwd(memberId, memberPhone, memberMail);
+	}
+	
 	public boolean nullCheck(String[] str)
 	{
 		if(str == null){return false;}
@@ -546,4 +586,5 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return true;
 	}
+
 }

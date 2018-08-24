@@ -51,7 +51,7 @@ public class MemberTest {
 	///////////////////////////////
 	@Test
 	public void updateMemberTest() {
-		MemberDTO dto1 = new MemberDTO("aaa1","bbb","bbb","bbb1","2018-02-02","bbb1","0100000001","aaa","2018-01-01");
+		MemberDTO dto1 = new MemberDTO("aaa","bbb","bbb","bbb1","2018-02-02","bbb1","0100000001","aaa","2018-01-01");
 		try {
 			memberMapper.updateMember(dto1);
 		} catch (Exception e) {
@@ -156,7 +156,7 @@ public class MemberTest {
 	@Test
 	public void loginTest() {
 		try {
-			System.out.println(memberMapper.login("aaa4","aaa"));
+			System.out.println(memberMapper.login("aaa4"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -91,16 +91,15 @@ public class BoardSSSTest {
 			}
 	}
 
-	@Test
-	public void searchBoardWay() {
-			String searchWay="게시판명";
-			String keyword="자유게시판";
-			try {
-				BoardSearchVO v = boardService.searchBoard(searchWay, keyword);
-				System.out.println(v);
-			} catch (Exception e) {
-				System.out.println("search 오류");
-			}
-	}
-	
+//	@Test
+//	public void searchBoardWay() {
+//			String searchWay="게시판명";
+//			String keyword="자유게시판";
+//			try {
+//				BoardSearchVO v = boardService.searchBoard(searchWay, keyword);
+//				System.out.println(v);
+//			} catch (Exception e) {
+//				System.out.println("search 오류");
+//			}
+//	}
 }
