@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.lecto.forward.dto.Criteria;
 import com.lecto.forward.dto.MemberDTO;
+import com.lecto.forward.dto.PageMaker;
 import com.lecto.forward.service.MemberService;
 import com.lecto.forward.vo.ManagerVO;
 import com.lecto.forward.vo.MemberArticleVO;
@@ -206,14 +209,46 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	}
 	
 	/** 회원 - 마이페이지에서 회원정보수정으로  */
-	@RequestMapping(value="m_modify", method=RequestMethod.GET)
-	public String updateMyInfoGET(Model model, HttpSession session) {
+	@RequestMapping(value="/m_modify", method=RequestMethod.GET)
+	public String updateMemberGet(Model model, HttpSession session) {
+	
+		String memberId = (String)session.getAttribute("login");
 		
-		String sessionId = (String) session.getAttribute("login");
-		MemberDTO dto = memberService.searchMember(sessionId);
+		MemberDTO findMember = memberService.searchMember(memberId);
+		String mail = findMember.getMemberMail();
+		int idx = mail.indexOf("@");
 		
-		model.addAttribute("memberDTO",dto);
+		String memberMail1 = mail.substring(0,idx);
+		String memberMail2 = mail.substring(idx+1);
+		
+		model.addAttribute("findMember", findMember);
+		model.addAttribute("memberMail1", memberMail1);
+		model.addAttribute("memberMail2", memberMail2);
+	
 		return "/m_modify";
+	}
+	
+	@RequestMapping(value="/m_modify", method=RequestMethod.POST)
+	public String updateMemeberPost(Model model, HttpServletRequest req, HttpSession session) {
+		System.out.println("여기 넘어옴.");
+		String memberId = (String)session.getAttribute("login");
+		System.out.println("aa"+memberId);
+		String memberMail = req.getParameter("memberMail1")+"@"+req.getParameter("memberMail2");
+		MemberDTO memberDTO = new MemberDTO(memberId,req.getParameter("memberPwd"),req.getParameter("memberName"),req.getParameter("memberNickname"),req.getParameter("memberBirth"),memberMail
+				,req.getParameter("memberPhone"),req.getParameter("memberAddress"),"2019-08-24");
+		try {
+			memberService.updateMember(memberDTO);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	
+		return "/m_mypage";
+	}
+	
+	@RequestMapping(value="/m_modify/cancel", method=RequestMethod.GET)
+	public String cancelUpdateMember() {
+		
+		return "redirect:/m_mypage";
 	}
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -252,10 +287,10 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 		}
 		return "redirect:/ad_memberlist";
 	}
-	
+
 	/** 관리자 - 회원 정보 수정으로 가기 */
 	@RequestMapping(value="ad_editmember", method=RequestMethod.GET)
-	public String updateMemberGET(@RequestParam("memId")String memId, Model model, HttpSession session) {
+	public String updateMemberGET(@RequestParam("memId")String memId, @ModelAttribute("cri")Criteria cri, Model model, HttpSession session) {
 		
 		String sessionId = "admin";
 		//String sessionId = (String) session.getAttribute("login");
@@ -271,12 +306,13 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	/** 관리자 - 회원 정보 수정 */
 	@RequestMapping(value="/ad_editmember", method=RequestMethod.POST)
 	public String updateMemberPOST(MemberDTO memberDTO, @RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
-			RedirectAttributes rda, HttpSession session) throws Exception {
+			Criteria cri, RedirectAttributes rda, HttpSession session) throws Exception {
 		String sessionId = "admin";
 		//String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			memberDTO.setMemberPhone("010"+tel2+tel3);
-			System.out.println(memberDTO.getMemberId());
+			rda.addAttribute("page", cri.getPage());
+			rda.addAttribute("perPageNum", cri.getPerPageNum());
 			if(memberService.updateMember(memberDTO)){
 				rda.addFlashAttribute("msg", "SUCCESS");
 				System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@SUCCESS");
@@ -307,19 +343,25 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	
 	/** 특정 게시판 회원 목록 조회 */
 	@RequestMapping(value="ad_memberlist/board", method=RequestMethod.POST)
-	public String memberListBoardGET(@RequestParam("boardName") String boardName, Model model, HttpSession session, HttpServletRequest request){
+	public String memberListBoardGET(@RequestParam("boardName") String boardName, Criteria cri, Model model, HttpSession session, HttpServletRequest request){
 		// 
 		String sessionId = "admin";
 		//String sessionId = (String) session.getAttribute("memberId");
 
 		if(sessionId.equals("admin")){
-			Object memberList;
+			Object[] memberList;
+		    PageMaker pageMaker = new PageMaker();
+		    pageMaker.setCri(cri);
 			if(request.getAttribute("memberList")!=null) {
-				;
+				pageMaker.setTotalCount(1);
 			}else {
-				memberList = memberService.searchBoardMember(boardName);
+				memberList = memberService.searchBoardMember(boardName, cri);
 				model.addAttribute("memberList", memberList);
+				if(memberList != null && memberList.length != 0)
+					pageMaker.setTotalCount(memberList.length);
 			}
+		    model.addAttribute("pageMaker", pageMaker);
+		    
 			Object[] boardList = memberService.searchBoard();
 			model.addAttribute("boardList", boardList); // 빼서 쓰는 걸로
 			model.addAttribute("boardName",boardName);
@@ -330,7 +372,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	/** 회원 키워드 조회  */
 	@RequestMapping(value="/ad_memberlist/search", method=RequestMethod.POST)
 	public String searchMemberPOST(@RequestParam("boardName")String boardName, 
-			@RequestParam("searchWay")String searchWay, @RequestParam("keyword")String keyword,
+			@RequestParam("searchWay")String searchWay, @RequestParam("keyword")String keyword, Criteria cri,
 			Model model, HttpSession session, HttpServletRequest request) {
 		
 		String sessionId = "admin";
@@ -338,14 +380,12 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 		
 		if(sessionId.equals("admin")){
 			Object[] memberList = new Object[1];
-			memberList = memberService.searchBoardMember(boardName, searchWay, keyword);
+			memberList = memberService.searchBoardMember(boardName, searchWay, keyword, cri);
 			if(memberList !=null && memberList.length != 0)
 				System.out.println(memberList[0].toString());
 			model.addAttribute("memberList", memberList);
-			//model.addAttribute("boardName", boardName);
-			model.addAttribute("msg", "SUCCESS");
 			request.setAttribute("memberList", memberList);
-			return memberListBoardGET(boardName, model, session, request);
+			return memberListBoardGET(boardName, cri, model, session, request);
 		} else {
 			model.addAttribute("msg", "FAIL");
 			return "/ad_memberlist";
@@ -354,7 +394,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	
 	/** 관리자 - 회원 삭제 */
 	@RequestMapping(value="/ad_memberlist/delete", method=RequestMethod.POST)
-	public String deleteMemberPOST(@RequestParam("chk") String[] memberIds, Model model, HttpSession session){
+	public String deleteMemberPOST(@RequestParam("chk") String[] memberIds, Criteria cri, RedirectAttributes rda, HttpSession session){
 
 		String sessionId = "admin";
 		//String sessionId = (String) session.getAttribute("memberId");
@@ -362,15 +402,18 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 		if(sessionId.equals("admin")){
 			//String[] memberIds = request.getParameterValues("chk");
 			if(!memberService.deleteMember(memberIds)){
-				model.addAttribute("msg", "FAIL");
+				rda.addFlashAttribute("msg", "FAIL");
 				System.out.println("삭제 실패인데");
 			} else{
-				model.addAttribute("msg", "SUCCESS");
+				rda.addFlashAttribute("msg", "SUCCESS");
 				System.out.println("삭제 성공인데");
 			}
 		} else {
-			model.addAttribute("msg", "FAIL");
+			rda.addFlashAttribute("msg", "FAIL");
 		}
+		rda.addAttribute("page", cri.getPage());
+		rda.addAttribute("perPageNum", cri.getPerPageNum());
+		
 		return "redirect:/ad_memberlist";
 	}
 	

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lecto.forward.dto.BoardDTO;
+import com.lecto.forward.dto.Criteria;
 import com.lecto.forward.dto.MemberDTO;
 import com.lecto.forward.dto.MemberGradesDTO;
 import com.lecto.forward.persistence.BoardMapper;
@@ -239,6 +240,8 @@ public class MemberServiceImpl implements MemberService{
 		return null;
 	}
 	
+	///////////////////////////////////
+	
 	public MemberDTO searchMember(MemberDTO memberDTO) {
 		if( !nullCheck(new String[]{memberDTO.getMemberId(), memberDTO.getMemberPwd(), memberDTO.getMemberName(), memberDTO.getMemberNickname(),
 				memberDTO.getMemberBirth(), memberDTO.getMemberMail(), memberDTO.getMemberPhone(),
@@ -324,7 +327,7 @@ public class MemberServiceImpl implements MemberService{
 		return null;
 	}
 	
-	public Object[] searchBoardMember(String boardKey) {
+	public Object[] searchBoardMember(String boardKey, Criteria cri) {
 		Object[] list = null;
 		List<BoardMemberListVO> vos = null;
 		if( !nullCheck(new String[]{boardKey}))
@@ -333,10 +336,10 @@ public class MemberServiceImpl implements MemberService{
 		try{
 			if(boardKey.substring(0, 2).equals("bo")){
 				System.out.println(boardKey);
-				vos = bmlViewMapper.searchBoardCode(boardKey);
+				vos = bmlViewMapper.searchBoardCode(boardKey, cri);
 			}
 			else{
-				vos = bmlViewMapper.searchBoardName(boardKey);
+				vos = bmlViewMapper.searchBoardName(boardKey, cri);
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -349,7 +352,7 @@ public class MemberServiceImpl implements MemberService{
 		return list;
 	}
 	
-	public Object[] searchBoardMember(String boardName, String searchWay, String keyword) {
+	public Object[] searchBoardMember(String boardName, String searchWay, String keyword, Criteria cri) {
 		if( !nullCheck(new String[]{boardName,searchWay, keyword}))
 			return null;
 		
@@ -358,13 +361,13 @@ public class MemberServiceImpl implements MemberService{
 		try {
 			switch(searchWay){
 			case "아이디":
-				list = bmlViewMapper.searchBNMemberId(boardName, keyword);
+				list = bmlViewMapper.searchBNMemberId(boardName, keyword, cri);
 				break;
 			case "닉네임":
-				list = bmlViewMapper.searchBNMemberNickname(boardName, keyword);
+				list = bmlViewMapper.searchBNMemberNickname(boardName, keyword, cri);
 				break;
 			case "등급명":
-				obj = searchBoardGradeMebers(boardName, keyword);
+				obj = searchBoardGradeMebers(boardName, keyword, cri);
 				break;
 			}
 			if(list != null && !list.isEmpty()) {
@@ -378,13 +381,13 @@ public class MemberServiceImpl implements MemberService{
 		return obj;
 	}
 	
-	public Object[] searchBoardGradeMebers(String boardName, String gradeName) {
+	public Object[] searchBoardGradeMebers(String boardName, String gradeName, Criteria cri) {
 		if( !nullCheck(new String[]{boardName, gradeName}))
 			return null;
 		Object[] objs = null;
 		List<BoardMemberListVO> list = null;
 		try {
-			list = bmlViewMapper.searchBNGradeName(boardName, gradeName);
+			list = bmlViewMapper.searchBNGradeName(boardName, gradeName, cri);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -583,4 +586,5 @@ public class MemberServiceImpl implements MemberService{
 		}
 		return true;
 	}
+
 }

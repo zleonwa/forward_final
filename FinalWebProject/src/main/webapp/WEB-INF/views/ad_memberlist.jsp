@@ -14,7 +14,7 @@
   <script>
   
   $(document).ready(function(e){
-		 $('#tb tr').click( function() {
+		 $('#tb tr').on('click', function() {
 			 var tr = $(this);
 			 var td = tr.children();
 			 var id = td.eq(1).text();
@@ -117,7 +117,9 @@
    	 	<div class="well text-center">
    	 		<h2 style="font-weight:bold;">${boardName}&nbsp;회원 관리</h2>    
  	 	</div>
+ 	 	
  	 	<form id="formValue" method="POST">
+ 	 	
         <div class="col-sm-10">
           <div class="well" style="height:100%;background:white;">
             <div class="container-fluid">
@@ -171,22 +173,33 @@
 			  </table>
 			  <hr/>
 			<div class="text-center">
-				<ul class="pagination">
-					<li><a href="#">◀</a></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><a href="#">▶</a></li>
-				</ul>
-			</div>
+					<ul class="pagination">
+						<!-- 이전 페이지로 가는 링크가 있어야 하는지 boolean 값으로 if 조건식을 통해 처리 -->
+						<c:if test="${pageMaker.prev }">
+							<li><a href="/ad_memberlist/board${pageMaker.makeQuery(pageMaker.startPage - 1 )}">&laquo;</a></li>
+						</c:if>
+						<!-- 각 페이지 번호의 출력 -->
+						<c:forEach begin="${pageMaker.startPage }"
+							end="${pageMaker.endPage }" var="idx">
+							<li
+								<c:out value="${pageMaker.cri.page == idx?'class = active':'' }"/>>
+								<a href="/ad_memberlist/board${pageMaker.makeQuery(idx)}">${idx}</a>
+							</li>
+						</c:forEach>
+
+						<c:if test="${pageMaker.next && pageMaker.endPage > 0 }">
+							<li><a href="/ad_memberlist/board${pageMaker.makeQuery(pageMaker.endPage + 1 )}">&raquo;</a></li>
+						</c:if>
+					</ul>
+				</div>
 			  <button type="button" class="btn btn-danger pull-right" id="memDel">회원 삭제</button>
 			  <a href="/ad_addmember" class="btn btn-success pull-right">회원 추가</a>
 			</div>
           </div>
         </div>
+        
         </form>
+        
 	</div>
 </body>
 </html>

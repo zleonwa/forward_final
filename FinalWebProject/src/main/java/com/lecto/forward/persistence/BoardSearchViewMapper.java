@@ -18,4 +18,6 @@ public interface BoardSearchViewMapper {
 	public BoardSearchVO searchMemberId(@Param("memberId")String memberId) throws Exception;
 	/** 게시판 담당자 모두 찾기 */
 	public List<BoardSearchVO> searchBoardSearchViewAll() throws Exception;
+	/** 테마명으로 찾기*/
+	public List<BoardSearchVO> searchThemeName(@Param("themeName")String themeName) throws Exception;	//추가됨
 }

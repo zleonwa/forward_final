@@ -14,10 +14,12 @@ public interface BoardService {
 	public boolean addMemberGrades(MemberGradesDTO membergradesDTO) throws Exception;
 	public boolean updateBoard(BoardDTO boardDTO,List<GradeDTO> grades) throws Exception;
 	public boolean updateBoard(String boardCode, String themeCode) throws Exception;
+	public boolean updateGrade(String boardCode, List<GradeDTO> grades) throws Exception;	//Ãß°¡µÊ 
 	public List<BoardSearchVO> searchBoard() throws Exception;
-	public BoardSearchVO searchBoard(String searchWay, String keyword) throws Exception;
+	public List<BoardSearchVO> searchBoard(String searchWay, String keyword) throws Exception;
 	public BoardDTO searchBoardName(String boardName) throws Exception;
 	public BoardDTO searchBoardCode(String boardCode) throws Exception;
+	public List<GradeDTO> searchGrade(String boardCode) throws Exception; //Ãß°¡µÊ
 	public String generateBoardCode() throws Exception;
 	public String generateBoardMemberGrade() throws Exception;
 	public boolean deleteBoard(String boardCode) throws Exception;

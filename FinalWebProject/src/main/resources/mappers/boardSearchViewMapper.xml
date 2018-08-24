@@ -54,4 +54,10 @@
 		from board_search_view
 	</select>
 	
+	<select id="searchThemeName" resultMap="boardSearchVO">
+		select <include refid="columns"/>
+		from board_search_view
+		where theme_name =#{themeName}
+	</select>
+	
   </mapper>

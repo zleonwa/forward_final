@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,6 +11,8 @@
 <title>회원가입</title>
 <link rel='dns-prefetch' href='//code.jquery.com' />
 <link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 <style type="text/css">
 img.wp-smiley, img.emoji {
 	display: inline !important;
@@ -169,7 +172,7 @@ img.wp-smiley, img.emoji {
 		});
 
 	 <!-- 전화번호 중복 체크-->
-		jQuery("#checkPhone").bind("click",function(e){
+		$("#checkPhone").bind("click",function(e){
 			
 			var memberPhone = $("#memberPhone").val();
 			if(memberPhone.length==0){
@@ -207,7 +210,7 @@ img.wp-smiley, img.emoji {
 		});
 
 		 <!-- 이메일 중복 체크-->
-		jQuery("#checkMail").bind("click",function(e){
+		$("#checkMail").bind("click",function(e){
 			
 			var memberMail1 = $("#memberMail1").val();
 			var memberMail2 = $("#memberMail2").val();

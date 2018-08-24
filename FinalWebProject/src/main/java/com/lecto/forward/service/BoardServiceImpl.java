@@ -1,5 +1,6 @@
 package com.lecto.forward.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -40,6 +41,7 @@ public class BoardServiceImpl implements BoardService {
 			return false;
 		}else {
 			try {
+				boardDTO.setBoardCode(generateBoardCode());
 				boardMapper.addBoardDTO(boardDTO);
 			} catch (Exception ex) {
 				System.out.println("addBoard 오류");
@@ -83,7 +85,7 @@ public class BoardServiceImpl implements BoardService {
 			return false;
 		}else {
 			try {
-				boardMapper.addBoardDTO(boardDTO);
+				boardMapper.updateBoard(boardDTO);
 				for (int i = 0; i < grades.size(); i++) {
 					gradeMapper.updateGrade(grades.get(i));
 				}
@@ -140,6 +142,26 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
+	/*추가됨*/
+	public boolean updateGrade(String boardCode, List<GradeDTO> grades) throws Exception{
+		if( boardCode ==null || grades ==null) {
+			return false;
+		}else {
+			try {
+				for(GradeDTO gradeDTO : grades) {
+					gradeMapper.updateGrade(gradeDTO);
+				
+					}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println(e +" updateGrade 오류");
+				return false;
+			} 
+			return true;
+		}
+	}
+	
 	public List<BoardSearchVO> searchBoard() throws Exception{
 		try {
 			List<BoardSearchVO> returnVal = boardSearchViewMapper.searchBoardSearchViewAll();
@@ -154,30 +176,29 @@ public class BoardServiceImpl implements BoardService {
 		}
 	}
 	
-	public BoardSearchVO searchBoard(String searchWay, String keyword) throws Exception{
+	public List<BoardSearchVO> searchBoard(String searchWay, String keyword) throws Exception{
 		if(searchWay==null || keyword==null) {
 			return null;
-		}else {
-			BoardSearchVO boardSearchVO=null;
-			try {
-				switch (searchWay) {
-				case "운영자아이디":
-					boardSearchVO = boardSearchViewMapper.searchMemberId(keyword);
-					break;
-				case "게시판명":
-					boardSearchVO = boardSearchViewMapper.searchBoardName(keyword);
-					break;
-				}
-				if (boardSearchVO != null) {
-					return boardSearchVO;
-				} else {
-					return null;
-				}
-			} catch (Exception e) {
-				System.out.println("search 오류");
-				return null;
-			}
 		}
+		List<BoardSearchVO> list = new ArrayList<BoardSearchVO>();
+		try {
+			switch (searchWay) {
+			case "운영자아이디":
+				System.out.println("운영자 아이ㅏ디 오류"+keyword);
+				list.add(boardSearchViewMapper.searchMemberId(keyword));
+				break;
+			case "게시판명":
+				list.add(boardSearchViewMapper.searchBoardName(keyword));
+				break;
+			case "테마명":
+				System.out.println(keyword);
+				list = boardSearchViewMapper.searchThemeName(keyword);
+				break;
+			}
+		} catch (Exception e) {
+			System.out.println("search 오류123");
+		}
+		return list;
 	}
 	
 	public BoardDTO searchBoardName(String boardName) throws Exception{
@@ -198,9 +219,30 @@ public class BoardServiceImpl implements BoardService {
 			return null;
 		}else {
 			try {
-				return boardMapper.searchBoardCode(boardCode);
+				
+				BoardDTO bt = boardMapper.searchBoardCode(boardCode);
+				System.out.println(bt);
+				return bt;
 			} catch (Exception e) {
 				System.out.println("search 오류");
+				return null;
+			}
+		}
+	}
+	/*추가됨*/
+	public List<GradeDTO> searchGrade(String boardCode) throws Exception{
+		if(boardCode==null) {
+			return null;
+		}else {
+			try {
+				List<GradeDTO> grades = gradeMapper.searchUseCode(boardCode);
+				for(int i=0;i<grades.size();i++) {
+					System.out.println(grades.get(i));
+				}
+				return grades;
+			} catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("searchGrade 오류");
 				return null;
 			}
 		}
@@ -273,8 +315,10 @@ public class BoardServiceImpl implements BoardService {
 				code = "bo" + String.valueOf(last+1);
 			}
 		} catch (Exception e) {
+			System.out.println("보드코드 생성 오류");
 			e.printStackTrace();
 		}
+		System.out.println(code+"보드코드");
 		return code;
 	}
 	

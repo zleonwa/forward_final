@@ -1,5 +1,6 @@
 package com.lecto.forward.service;
 
+import com.lecto.forward.dto.Criteria;
 import com.lecto.forward.dto.MemberDTO;
 import com.lecto.forward.vo.MemberArticleVO;
 
@@ -19,9 +20,9 @@ public interface MemberService {
 	public MemberDTO searchMember(String memberId);
 	public String searchMemberId(String memberName, String memberPhone, String memberMail);
 	public String searchMemberPwd(String memberId, String memberPhone, String memberMail);
-	public Object[] searchBoardMember(String boardKey);
-	public Object[] searchBoardMember(String boardName, String searchWay, String keyword);
-	public Object[] searchBoardGradeMebers(String boardName, String gradeName);
+	public Object[] searchBoardMember(String boardKey, Criteria cri);
+	public Object[] searchBoardMember(String boardName, String searchWay, String keyword, Criteria cri);
+	public Object[] searchBoardGradeMebers(String boardName, String gradeName, Criteria cri);
 	public Object[] searchManager(String searchWay, String keyword);
 	public Object[] searchManager();
 	public Object[] searchBoard();

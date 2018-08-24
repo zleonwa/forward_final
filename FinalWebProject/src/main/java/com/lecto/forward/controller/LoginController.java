@@ -1,7 +1,7 @@
 package com.lecto.forward.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -43,23 +43,24 @@ public class LoginController {
 
 					// Object로 다찾아온다.
 					Object[] managers = memberService.searchManager();
-					List<String> managerIds = new ArrayList<String>();
+					Map<String, ManagerVO> managerIds = new HashMap<String, ManagerVO>();
 					if (managers != null) {
 						
 						for (int i = 0; i < managers.length; i++) {
-							managerIds.add(((ManagerVO) managers[i]).getMemberId());
-
+							managerIds.put(((ManagerVO) managers[i]).getMemberId(), (ManagerVO)managers[i]);
 						}
 					}
 					System.out.println("c");
 
 					// 관리자인 경우
 					if (member.getMemberId().equals("admin")) {
+						session.setAttribute("boardName", "전체 사이트");
 						System.out.println("d");
 						return "/a_main";
 					}
 					// 운영자인 경우
-					else if (managerIds.contains((member.getMemberId()))) {
+					else if (managerIds.containsKey((member.getMemberId()))) {
+						session.setAttribute("boardName", managerIds.get(member.getMemberId()).getBoardName());
 						System.out.println("e");
 						return "/a_main";
 					}

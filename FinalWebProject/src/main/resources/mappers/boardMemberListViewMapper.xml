@@ -24,16 +24,20 @@
 	 	member_mail, member_phone, member_address, register_date
 	 </sql>	
 	 
-	 <select id="searchBoardCode" resultMap="boardMemberListVO">
+	 <select id="searchBoardCode" parameterType="com.lecto.forward.dto.Criteria" resultMap="boardMemberListVO">
 	 	select <include refid="columns" />
 	 	from board_memberlist_view
 	 	where board_code = #{boardCode}
+	 	order by register_date desc
+	 	limit #{cri.pageStart}, #{cri.perPageNum}
 	 </select>
 	 
-	 <select id="searchBoardName" resultMap="boardMemberListVO">
+	 <select id="searchBoardName"  parameterType="com.lecto.forward.dto.Criteria" resultMap="boardMemberListVO">
 	 	select <include refid="columns" />
 	 	from board_memberlist_view
 	 	where board_name = #{boardName}
+	 	order by register_date desc
+	 	limit #{cri.pageStart}, #{cri.perPageNum}
 	 </select>
 	 
 	 <select id="searchBCMemberId" resultMap="boardMemberListVO">
@@ -43,25 +47,29 @@
 	 	and member_id like CONCAT('%',#{memberId},'%')
 	 </select>
 	 
-	 <select id="searchBNMemberId" resultMap="boardMemberListVO">
+	 <select id="searchBNMemberId"  parameterType="com.lecto.forward.dto.Criteria" resultMap="boardMemberListVO">
 	 	select <include refid="columns" />
 	 	from board_memberlist_view
 	 	where board_name = #{boardName}
 	 	and member_id like CONCAT('%',#{memberId},'%')
+	 	order by register_date desc
+	 	limit #{cri.pageStart}, #{cri.perPageNum}
 	 </select>
 	 
-	 <select id="searchBCMemberNickname" resultMap="boardMemberListVO">
+	 <select id="searchBCMemberNickname"  resultMap="boardMemberListVO">
 	 	select <include refid="columns" />
 	 	from board_memberlist_view
 	 	where board_code = #{boardCode}
 	 	and member_nickname like CONCAT('%',#{memberNickname},'%')
 	 </select>
 	 
-	 <select id="searchBNMemberNickname" resultMap="boardMemberListVO">
+	 <select id="searchBNMemberNickname" parameterType="com.lecto.forward.dto.Criteria" resultMap="boardMemberListVO">
 	 	select <include refid="columns" />
 	 	from board_memberlist_view
 	 	where board_name = #{boardName}
 	 	and member_nickname like CONCAT('%',#{memberNickname},'%')
+	 	order by register_date desc
+	 	limit #{cri.pageStart}, #{cri.perPageNum}
 	 </select>
 	 
 	 <select id="searchBCGradeName" resultMap="boardMemberListVO">
@@ -71,10 +79,13 @@
 	 	and grade_name = #{gradeName}
 	 </select>
 	 
-	 <select id="searchBNGradeName" resultMap="boardMemberListVO">
+	 <select id="searchBNGradeName" parameterType="com.lecto.forward.dto.Criteria" resultMap="boardMemberListVO">
 	 	select <include refid="columns" />
 	 	from board_memberlist_view
 	 	where board_name = #{boardName}
 	 	and grade_name = #{gradeName}
+	 	order by register_date desc
+	 	limit #{cri.pageStart}, #{cri.perPageNum}
 	 </select>
+	 
 	</mapper>

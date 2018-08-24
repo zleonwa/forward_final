@@ -45,7 +45,7 @@ public class BoardSearchVO {
 	@Override
 	public String toString() {
 		return "BoardSearchViewVO [memberId=" + memberId + ", themeName=" + themeName + ", boardName=" + boardName +", boardCode="
-				+ "]";
+				+boardCode+ "]";
 	}
 	@Override
 	public int hashCode() {

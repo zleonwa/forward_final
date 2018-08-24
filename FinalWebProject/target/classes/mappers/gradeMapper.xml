@@ -77,7 +77,7 @@
 	</select>
 	
 	<!-- boardCode에 해당하는 등급 찾기 -->
-	<select id="searchUseCode" resultType="java.util.HashMap">
+	<select id="searchUseCode" resultMap="grade">
 		select * from grade_tb
 		where board_code=#{boardCode}
 	</select>

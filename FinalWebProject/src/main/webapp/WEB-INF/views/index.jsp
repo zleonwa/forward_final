@@ -53,7 +53,6 @@ img.emoji {
 <![endif]-->
 <script type='text/javascript' src='./resources/js/jquerySmash.js'></script>
 <script type='text/javascript' src='./resources/js/jquery-migrate.min.js'></script>
-<script type='text/javascript' src='//code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
 <script type='text/javascript' src='./resources/js/unslider.js'></script>
 <link rel="alternate" type="text/xml+oembed" href="./resources/json/embed.json" />
 <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
@@ -84,7 +83,7 @@ img.emoji {
 									<li class="active">
 					<div class="slide_itembx">
 						<div class="bg"></div>
-						<div class="slide_bg" style="background: url('mainSc.gif') no-repeat;background-attachment: fixed;background-position: center top;background-size: cover"></div>
+						<div class="slide_bg" style="background: url('') no-repeat;background-attachment: fixed;background-position: center top;background-size: cover"></div>
 						<div class="text_itembx">
 							<div class="max_container">
 								<h2 class="delay_1 ani_left">SMASH</h2>
@@ -188,9 +187,9 @@ img.emoji {
 									</div>
 									<div class="basic_vs_bx">
 										<div class="tbl_bx">
-											<div class="home thum"><img src="./images/teamLogo4.png" alt="맨유" /></div>
+											<div class="home thum"><img src="./resources/images/teamLogo4.png" alt="맨유" /></div>
 											<div class="count"><span class="count_text"> VS </span></div>
-											<div class="expedition thum"><img src="./images/teamLogo5.png" alt="유벤" /></div>
+											<div class="expedition thum"><img src="./resources/images/teamLogo5.png" alt="유벤" /></div>
 											</div>
 									</div>
 							</div>
@@ -206,9 +205,9 @@ img.emoji {
 								</div>
 								<div class="basic_vs_bx">
 									<div class="tbl_bx">
-										<div class="home thum"><img src="./images/teamLogo6.png" alt="레알" /></div>
+										<div class="home thum"><img src="./resources/images/teamLogo6.png" alt="레알" /></div>
 										<div class="count"><span class="count_text"> VS </span></div>
-										<div class="expedition thum"><img src="./images/teamLogo7.png" alt="갈치" /></div>
+										<div class="expedition thum"><img src="./resources/images/teamLogo7.png" alt="갈치" /></div>
 									</div>
 								</div>
 							</div>
@@ -224,9 +223,9 @@ img.emoji {
 							</div>
 										<div class="basic_vs_bx">
 											<div class="tbl_bx">
-												<div class="home thum"><img src="./images/teamLogo1.png" alt="로고" /></div>
+												<div class="home thum"><img src="./resources/images/teamLogo1.png" alt="로고" /></div>
 												<div class="count"><span class="count_text"> VS </span></div>
-												<div class="expedition thum"><img src="./images/teamLogo8.png" alt="로고" /></div>
+												<div class="expedition thum"><img src="./resources/images/teamLogo8.png" alt="로고" /></div>
 											</div>
 										</div>
 									</div>
@@ -397,106 +396,6 @@ img.emoji {
 	<!-- .team Ranking -->
 </div>
 </div>
-<!-- .메인 컨텐츠 2 -->
-
-<div>
-<div class="home_rowbx five_bx">
-	<div class="sns_slidebx">
-				<ul style="width:3444px;overflow:hidden;">
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://youtu.be/ljf_-U5Wfho" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/jh.png" alt="jg" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=elVRsRJOl7U" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/youtube2.jpg" alt="최종플중" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=QjSMQj0WJpQ" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/hnd.png" alt="호날두" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=Hwa6-tHl5_k" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/hw.png" alt="최종플중" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=Hwa6-tHl5_k" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/youtube3.jpg" alt="최종플중3" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=8tRP9Fc8m0k" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/ping.png" alt="탁구" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=J0I9qCvZZEY" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/rbr.png" alt="농구" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-				<li class="youtube">
-					<div class="slide_itembx">
-						<a href="https://www.youtube.com/watch?v=WcIC51SRpZU" target="_blank" class="itembx">
-							<span class="bg"></span>
-							<img src="./images/youtube4.jpg" alt="인생샷" />
-							<span class="icon_item"></span>
-						</a>
-					</div>
-				</li>
-			</ul>
-	</div>
-</div>
-<!-- .메인 컨텐츠 5 -->
-
-<!-- 기본팝업 / 영상 팝업 -->
-<!-- <div class="basic_popup" style="display:none">
-	<div class="bg"></div>
-	<div class="popup_content">
-		<div class="max_container">
-			<a href="#;" class="close_btn">close</a>
-			<div class="photobx club_bx">
-				<div class="photobx_contbx">
-					<div class="thum"><iframe title="구단영상" width="100%" src="" frameborder="0" allowfullscreen></iframe></div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->
-
-
 
 		</div><!-- .site-content -->
 
@@ -507,7 +406,6 @@ img.emoji {
 					<ul>
 						<li><a href="#">개인정보처리방침</a></li>
 						<li><a href="#">이용약관</a></li>
-						<li><a href="#">이메일무단수집거부</a></li>
 					</ul>
 				</div>
 			</div>
@@ -535,8 +433,8 @@ img.emoji {
 var screenReaderText = {"expand":"\ud558\uc704 \uba54\ub274 \ud655\uc7a5","collapse":"\ud558\uc704 \uba54\ub274 \ucd95\uc18c"};
 /* ]]> */
 </script>
-<script type='text/javascript' src='./js/functions.js'></script>
-<script type='text/javascript' src='./js/kmcis.js'></script>
+<!-- <script type='text/javascript' src='./js/functions.js'></script>
+<script type='text/javascript' src='./js/kmcis.js'></script> -->
 </div>
 <!-- 탑버튼 -->
 <a href="#top" class="top_btn">
