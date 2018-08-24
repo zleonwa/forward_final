@@ -330,7 +330,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="ad_memberlist", method=RequestMethod.GET)
 	public String memberListGET(Model model, HttpSession session){
 
-		String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("login");
 
 		if(sessionId.equals("admin")){
 			Object[] boardList = memberService.searchBoard();
@@ -343,7 +343,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="ad_memberlist/board", method=RequestMethod.POST)
 	public String memberListBoardGET(@RequestParam("boardName") String boardName, Criteria cri, Model model, HttpSession session, HttpServletRequest request){
 
-		String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("login");
 
 		if(sessionId.equals("admin")){
 			Object[] memberList;
@@ -392,7 +392,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_memberlist/delete", method=RequestMethod.POST)
 	public String deleteMemberPOST(@RequestParam("chk") String[] memberIds, Criteria cri, RedirectAttributes rda, HttpSession session){
 
-		String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("login");
 		
 		if(sessionId.equals("admin")){
 			//String[] memberIds = request.getParameterValues("chk");
@@ -476,7 +476,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			@RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
 			RedirectAttributes rda, HttpSession session) {
 		
-		String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			
 			memberDTO.setMemberPhone("010"+tel2+tel3);
@@ -497,7 +497,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_managerlist", method=RequestMethod.GET)
 	public String managerListGET(Model model, HttpSession session, HttpServletRequest request){
 
-		String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("login");
 		
 		if(sessionId.equals("admin")){
 			Object memberList;
@@ -540,7 +540,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_managerlist/delete", method=RequestMethod.POST)
 	public String adminManagerDelete(@RequestParam("chk") String[] memberIds, Model model, HttpSession session){
 
-		String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("login");
 		
 		if(sessionId.equals("admin")){
 			//String[] memberIds = request.getParameterValues("chk");
@@ -561,8 +561,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_admininfo", method=RequestMethod.GET)
 	public String updateAdminPOST(Model model, HttpSession session){
 
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 
 		if(sessionId.equals("admin")){
 			
@@ -574,8 +573,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_admininfo", method=RequestMethod.POST)
 	public String updateAdminPOST(@RequestParam("newMemberPwd")String newMemberPwd, Model model, HttpSession session){
 
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 
 		if(sessionId.equals("admin")){
 			memberService.updateMemberPwd(sessionId, newMemberPwd);
