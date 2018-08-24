@@ -230,7 +230,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	
 	@RequestMapping(value="/m_modify", method=RequestMethod.POST)
 	public String updateMemeberPost(Model model, HttpServletRequest req, HttpSession session) {
-		System.out.println("여기 넘어옴.");
+		
 		String memberId = (String)session.getAttribute("login");
 		System.out.println("aa"+memberId);
 		String memberMail = req.getParameter("memberMail1")+"@"+req.getParameter("memberMail2");
@@ -257,8 +257,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="ad_addmember", method=RequestMethod.GET)
 	public String addMemberGET(HttpSession session) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			return "/ad_addmember";
 		}
@@ -270,8 +269,8 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	public String addMemberPOST(MemberDTO memberDTO, @RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
 			RedirectAttributes rda, HttpSession session) throws Exception {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			
 			memberDTO.setMemberPhone("010"+tel2+tel3);
@@ -292,8 +291,8 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="ad_editmember", method=RequestMethod.GET)
 	public String updateMemberGET(@RequestParam("memId")String memId, @ModelAttribute("cri")Criteria cri, Model model, HttpSession session) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			MemberDTO member = memberService.searchMember(memId);
 			model.addAttribute("member", member);
@@ -307,8 +306,8 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_editmember", method=RequestMethod.POST)
 	public String updateMemberPOST(MemberDTO memberDTO, @RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
 			Criteria cri, RedirectAttributes rda, HttpSession session) throws Exception {
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			memberDTO.setMemberPhone("010"+tel2+tel3);
 			rda.addAttribute("page", cri.getPage());
@@ -331,8 +330,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="ad_memberlist", method=RequestMethod.GET)
 	public String memberListGET(Model model, HttpSession session){
 
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("memberId");
 
 		if(sessionId.equals("admin")){
 			Object[] boardList = memberService.searchBoard();
@@ -344,9 +342,8 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	/** 특정 게시판 회원 목록 조회 */
 	@RequestMapping(value="ad_memberlist/board", method=RequestMethod.POST)
 	public String memberListBoardGET(@RequestParam("boardName") String boardName, Criteria cri, Model model, HttpSession session, HttpServletRequest request){
-		// 
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("memberId");
+
+		String sessionId = (String) session.getAttribute("memberId");
 
 		if(sessionId.equals("admin")){
 			Object[] memberList;
@@ -375,8 +372,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			@RequestParam("searchWay")String searchWay, @RequestParam("keyword")String keyword, Criteria cri,
 			Model model, HttpSession session, HttpServletRequest request) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 		
 		if(sessionId.equals("admin")){
 			Object[] memberList = new Object[1];
@@ -396,8 +392,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_memberlist/delete", method=RequestMethod.POST)
 	public String deleteMemberPOST(@RequestParam("chk") String[] memberIds, Criteria cri, RedirectAttributes rda, HttpSession session){
 
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("memberId");
 		
 		if(sessionId.equals("admin")){
 			//String[] memberIds = request.getParameterValues("chk");
@@ -423,8 +418,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_addmanager", method=RequestMethod.GET)
 	public String addManagerGET(Model model, HttpSession session) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			Object[] boardList = memberService.searchBoard();
 			model.addAttribute("boardList", boardList);
@@ -438,8 +432,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			@RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
 			Model model, HttpSession session) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			
 			memberDTO.setMemberPhone("010"+tel2+tel3);
@@ -461,8 +454,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	public String updateManagerGET(@RequestParam("memberId")String memberId,
 			Model model, HttpSession session) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 		if(sessionId.equals("admin")){
 			ManagerVO vo = (ManagerVO) memberService.searchManager("아이디", memberId)[0];
 			MemberDTO member = memberService.searchMember(memberId);
@@ -484,8 +476,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			@RequestParam("tel2")String tel2, @RequestParam("tel3") String tel3,
 			RedirectAttributes rda, HttpSession session) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("memberId");
 		if(sessionId.equals("admin")){
 			
 			memberDTO.setMemberPhone("010"+tel2+tel3);
@@ -506,8 +497,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_managerlist", method=RequestMethod.GET)
 	public String managerListGET(Model model, HttpSession session, HttpServletRequest request){
 
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("memberId");
 		
 		if(sessionId.equals("admin")){
 			Object memberList;
@@ -529,8 +519,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	public String searchManagerPOST(@RequestParam("searchWay")String searchWay, @RequestParam("keyword")String keyword,
 			Model mv, HttpSession session, HttpServletRequest request) {
 		
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("login");
+		String sessionId = (String) session.getAttribute("login");
 		
 		if(sessionId.equals("admin")){
 			Object[] memberList = memberService.searchManager(searchWay, keyword);
@@ -551,8 +540,7 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 	@RequestMapping(value="/ad_managerlist/delete", method=RequestMethod.POST)
 	public String adminManagerDelete(@RequestParam("chk") String[] memberIds, Model model, HttpSession session){
 
-		String sessionId = "admin";
-		//String sessionId = (String) session.getAttribute("memberId");
+		String sessionId = (String) session.getAttribute("memberId");
 		
 		if(sessionId.equals("admin")){
 			//String[] memberIds = request.getParameterValues("chk");

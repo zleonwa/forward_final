@@ -17,7 +17,7 @@
 	 </resultMap>
 
 	 <sql id="columns">
-	 	board_code, member_nickname, article_hits, article_title, article_content
+	 	board_code, member_nickname, article_hits, article_title, article_content,
 	 	article_code, article_date, notice, cmt_cnt
 	 </sql>	
 	 
