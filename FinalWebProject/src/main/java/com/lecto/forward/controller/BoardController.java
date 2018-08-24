@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,9 +33,8 @@ public class BoardController{
 	}
 	
 	@RequestMapping(value="/ad_addboard", method=RequestMethod.GET)
-	public String addBoard(String boardName) throws Exception{
-		System.out.println(boardName+"ÇÏÇÏ");		
-		
+	public String addBoard(@Param("boardCode")String boardName) throws Exception{
+		System.out.println(boardName+"ÇÏÇÏ");	
 		return "/ad_addboard";
 	}
 	@RequestMapping(value="/ad_addboard", method=RequestMethod.POST)
@@ -187,7 +187,7 @@ public class BoardController{
 		return searchBoard2(searchWay, keyword,model,request);	
 	}
 	
-/*	@RequestMapping(value="/deleteBoardList", method =RequestMethod.GET)
+	@RequestMapping(value="/deleteBoardList", method =RequestMethod.GET)
 	public String deleteBoardListGET(HttpServletRequest request,  String boardName2,Model model) throws Exception{
 		System.out.println("µô¸®Æ® °Ù");
 		System.out.println(boardName2+"º¸µåÄÚµå °Ù");
@@ -200,9 +200,9 @@ public class BoardController{
 //		System.out.println(request.getParameter("boardCode"));
 		model.addAttribute("boardViewList",boardService.searchBoard());	
 		return "redirect:/ad_boardlist";
-	}*/
+	}
 	
-	@RequestMapping(value="/deleteBoardList", method=RequestMethod.GET)
+	@RequestMapping(value="/deleteBoardList", method=RequestMethod.POST)
 	public String deleteBoardList(@RequestParam("boardCode00")String[] boardCodes) throws Exception{
 		System.out.println("µô¸®Æ® µé¾î¿È");
 //		System.out.println(boardName2);

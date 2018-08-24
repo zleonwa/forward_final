@@ -2,16 +2,16 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ko-KR"
-	itemscope
-	itemtype="http://schema.org/Article"
-	prefix="og: http://ogp.me/ns#"  class="no-js">
+<!DOCTYPE html>
+<!-- <!DOCT`YPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> -->
+<%@ include file="userheader.jsp" %>
+<html lang="ko-KR">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="format-detection" content="telephone=no">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>
 <title>SMASH</title>
 
@@ -43,18 +43,20 @@ img.emoji {
 }
 </style>
 
+<script>
 
+</script>
 <link rel='stylesheet' id='dashicons-css'  href='./resources/css/dashicons.min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='post-views-counter-frontend-css'  href='./resources/css/frontend.css' type='text/css' media='all' />
 <link rel='stylesheet' id='twentysixteen-fonts-css'  href='./resources/css/css.css' type='text/css' media='all' />
 <link rel='stylesheet' id='genericons-css'  href='./resources/css/genericons.css' type='text/css' media='all' />
 <link rel='stylesheet' id='twentysixteen-style-css'  href='./resources/css/style.css' type='text/css' media='all' />
-<link rel='stylesheet' id='jquery-ui-css'  href='//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css' type='text/css' media='all' />
-<link rel='stylesheet' id='unslider-css'  href='./resources/css/unslider.css' type='text/css' media='all' />
+<!-- <link rel='stylesheet' id='jquery-ui-css'  href='//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.min.css' type='text/css' media='all' /> -->
+<!-- <link rel='stylesheet' id='unslider-css'  href='./resources/css/unslider.css' type='text/css' media='all' /> -->
 <script type='text/javascript' src='./resources/js/jquery.js'></script>
 <script type='text/javascript' src='./resources/js/jquery-migrate.min.js'></script>
 <script type='text/javascript' src='//code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
-<script type='text/javascript' src='./resources/css/unslider.js'></script>
+<!-- <script type='text/javascript' src='./resources/css/unslider.js'></script> -->
 <link rel="alternate" type="application/json+oembed" href="./json/embed.json" />
 <link rel="alternate" type="text/xml+oembed" href="./json/embed.json" />
 		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
@@ -112,10 +114,10 @@ img.emoji {
 							<div class="menu-main_nav-container">
 							<ul id="menu-main_nav-1" class="primary-menu">
 							<li class="nav_greatu menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-91">
-							<a href="index.jsp">Home</a>
+							<a href="/index">Home</a>
 							<ul class="sub-menu">
 								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92"><a href="noticeboard.jsp">공지사항</a></li>
-								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-95"><a href="article.do?job=articleListPerBoard&boardCode=bo1">자유게시판</a>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-95"><a href="#">자유게시판</a>
 									<ul class="sub-menu">
 										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7014"><a href="#">Q&#038;A</a></li>
 								</ul>
@@ -183,8 +185,8 @@ img.emoji {
 						<!-- 빵가루 -->
 			<div class="breadcrumb">
 				<ul>
-					<li class="home"><a class="item" href="index.jsp">home</a></li>						
-					<li><a class="item" href="article.do?job=articleListPerBoard&boardCode=bo1">자유게시판</a></li>						
+					<li class="home"><a class="item" href="/index">home</a></li>						
+					<li><a class="item" href="#">자유게시판</a></li>						
 				</ul>
 			</div>
 			<!-- .빵가루 -->
@@ -204,8 +206,8 @@ img.emoji {
 						<div class="pg_headbx align_c m_top">
 							<div class="tabbx tabrow50">
 								<ul>
-									<li><a href="noticeboard.jsp;" data-tab-link="#">공지사항</a></li>
-									<li class="active"><a href="article.do?job=articleListPerBoard&boardCode=bo1" data-tab-link="#">자유게시판</a></li>
+									<li><a href="#" data-tab-link="#">공지사항</a></li>
+									<li class="active"><a href="#" data-tab-link="#">자유게시판</a></li>
 								</ul>
 							</div>
 						</div>
@@ -214,23 +216,35 @@ img.emoji {
 							<div class="basic_s_bx">
 								<!-- 셀렉박스 -->
 								<div class="basic_select_bx board_select_bx">
-									<a class="textbx" href="#;">제목</a>
-									<ul class="select_ul">
+									<!-- <a class="textbx" href="#;">제목</a> -->
+									<select style="width:70px;height:46px;color=light-gray;" name="selectBox" id="selectBox">
+									    <option value="subject">제목</option>
+									    <option value="content">내용</option>
+									    <option value="author">작성자</option>
+									</select>
+									
+									<!-- <ul class="select_ul">
 										<li><a href="javascript:" data-value="subject">제목</a></li>
 										<li><a href="javascript:" data-value="content">내용</a></li>
 										<li><a href="javascript:" data-value="author">작성자</a></li>
-									</ul>
+									</ul>  -->
 								</div>
 								<!-- 서치박스 -->
 								<div class="basic_search_bx">
-									<form name="board_search" method="POST">
-										<input type="hidden" id="boardCode" name="boardCode" value="bo1">
+									<form name="board_search" method="GET" id="search" >
+										<input type="hidden" id="boardCode" name="boardCode" value="${boardCode}">
+										<input type="hidden" id="searchWay" name="searchWay" value="">										
 										<label for="pg_search">search</label>
-										<input id="pg_search" type="text" name="q" class="text_input" value="">
-										<input type="submit" class="submit_input" value="검색" >
+										<input id="pg_search" type="text" name="keyword" class="text_input" value="">
 									</form>
 								</div>
+								<div class="basic_btnbx">
+									<a href="#" class="basic_btn search" id="btn2"><span class="text">검색</span></a>
+								</div>
 								<!-- .서치박스 -->
+								<form name="write" action="/m_addarticle" method="GET" id="write">
+									<input type="hidden" id="boardCode" name="boardCode" value="${boardCode}">
+								</form>
 							</div>
 						</div>
 						<!-- .셀렉박스 -->
@@ -254,14 +268,18 @@ img.emoji {
 									<th scope="col">조회수</th>
 								</tr>
 							</thead>
-							<tbody>
+							<tbody id="articleList">
 								<c:forEach items="${articles}" var="articleVO">
 									<tr>
+										<!-- no -->
 										<td>${articleVO.articleCode}</td>
-										<td><a href='/board/bno=${articleVO.articleCode}'>${articleVO.articleTitle}</a></td>
+										<!-- 제목 -->
+										<td>${articleVO.articleTitle}</td>
+										<!-- 작성자 -->
 										<td>${articleVO.memberNickname}</td>
-										<td><%-- <fmt:formatDate pattern="yyyy-MM-dd HH:mm" --%>
-												<!-- value=" -->${articleVO.articleDate}<!-- " --> /></td>
+										<!-- 작성일 -->
+										<td>${articleVO.articleDate}</td>
+										<!-- 조회수-->
 										<td><span class="badge bg-red">${articleVO.articleHits }</span></td>
 									</tr>
 								</c:forEach>
@@ -269,10 +287,12 @@ img.emoji {
 					</table>
 				</div>
 				<!-- .리스트 -->
-								<!-- 글쓰기 버튼 -->
+								<!-- ` 버튼 -->
+				<%-- <c:if test="${sessionScope.login != null}"> --%>
 				<div class="basic_btnbx">
-					<a href="/m_writearticle" class="basic_btn"><span class="text">글쓰기</span></a>
+					<a href="#" class="basic_btn write"><span class="text">글쓰기</span></a>
 				</div>
+				<%-- </c:if> --%>
 				<!--. 글쓰기 버튼 -->
 				<!-- 페이징 -->
 				<div class="paging">
@@ -300,3 +320,107 @@ img.emoji {
 </div><!-- .content-area -->
 </body>
 </html>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script>
+	jQuery(document).ready(function($){
+		/* 글쓰기 페이지 이동 */
+		$(".write").on("click", function(e){
+			$("#write").submit();
+		});
+		
+
+		/* 검색 */
+		//$("#btn2").click(function() {
+			var target = document.getElementById("selectBox");
+			$("#searchWay").val(target.options[target.selectedIndex].value);
+			var $form = $("#searchWay");
+			$(".search").submit();
+			$form.attr("action","m_searchKeyAndWay");
+		
+			
+		/* 상세보기  동적 폼 생성*/
+		$('#articleList tr').click( function() {
+			 var tr = $(this);
+			 var td = tr.children();
+			 var id = td.eq(0).text();
+		     var $form = $('<form></form>');
+		     $form.attr('action', '/m_detailarticle');
+		     $form.attr('method', 'get');
+		     $form.appendTo('body');
+		     var articleCd = '<input type="hidden" name="articleCode" value="' + id + '" articleCode="$(articleCode}">';
+		     alert(articleCd);
+		     $form.append(articleCd);
+		     $form.submit();
+		});
+		
+		$('#tb tr').on('click', ':checkbox', function(e) {
+		    e.stopPropagation();
+		});
+		
+		/* 	$("ul").on("click", ".init", function() {
+	    $(this).closest("ul").children('li:not(.init)').slideDown();
+	});
+
+
+	var allOptions = $("ul").children('li:not(.init)');
+	$("ul").on("click", "li:not(.init)", function() {
+	    allOptions.removeClass('selected');
+	    $(this).addClass('selected');
+	    $("ul").children('.init').html($(this).html());
+	    allOptions.slideUp();
+	}); */
+		
+	    /* alert("The selected Value is "+ $("ul").find(".selected").data("value")); */
+		//});
+		/* $("ul").on("click", ".init", function() {
+		    $(this).closest("ul").children('li:not(.init)').slideDown();
+		    
+		});
+		
+		/* $("ul").on("click", "li:not(.init)", function() {
+			var allOptions = $(".select_ul").children('li:not(.init)');
+		    allOptions.removeClass('selected');
+		    $(this).addClass('selected');
+		    $("ul").children('.init').html($(this).html());
+		     allOptions.slideUp();
+		//}); */
+		
+		/* $("#btn2").click(function() {
+			alert($(".select_ul").find(".selected").data("value")); */
+		   /*  alert("The selected Value is "+ $("ul").find(".selected").attr("data-value")); */
+		//});
+	});
+	
+	
+	//function search(){
+
+		/* var allOptions = $("ul").children('li:not(.init)');
+		$("ul").on("click", "li:not(.init)", function() {
+		    allOptions.removeClass('selected');
+		    $(this).addClass('selected');
+		    $("ul").children('.init').html($(this).html());
+		    allOptions.slideUp();
+		});
+		
+		
+		$("#btn2").click(function() {
+			$("ul").on("click", ".init", function() {
+			    $(this).closest("ul").children('li:not(.init)').slideDown();
+			});
+			
+		    alert("The selected Value is "+ $("ul").find(".selected").data("value"));
+		}); */
+		/* $("#select_ul").children().each(function(){
+		    alert("1. $(this).text() : "+$(this).text()+", $(this).attr() : "+$(this).attr("value"));
+		  }); */
+		// var $searchForm = $('form[name="board_search"]');
+		//console.log("1. $(this).text() : "+$(this).text()+", $(this).attr() : "+$(this).attr("value"));
+		//if($searchForm.length){
+//			$searchForm.find('input[name="c"]').val($(this).data('value'));
+	//	}
+		//console.log($(this));
+		//$(this).closest('ul').slideUp(200);
+		//$(".content").var($(this).closest('.basic_select_bx').find('.textbx').text($(this).text()));
+		//$(".search").submit();		 */	
+//	});
+</script>

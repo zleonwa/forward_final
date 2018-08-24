@@ -120,7 +120,7 @@ public class ArticleSourceTest {
 		dao.updateDate("ar1", "2018-12-23");
 	}
 	
-	@Test
+	/*@Test
 	public void testDeleteArticleCode() throws Exception{
 		int result;
 		
@@ -152,7 +152,7 @@ public class ArticleSourceTest {
 		result = dao.deleteArticleParams(articles);
 		System.out.println(result);
 		
-	}
+	}*/
 	
 	@Test
 	public void testSearchTitle()throws Exception{

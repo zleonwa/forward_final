@@ -79,7 +79,7 @@ img.emoji {
 			<div class="breadcrumb">
 				<ul>
 					<li class="home"><a class="item" href="http://gangwon-fc.com">home</a></li>
-										<li><a class="item" href="http://gangwon-fc.com/great-u/">GREAT U</a></li>						
+										<li><a class="item" href="http://gangwon-fc.com/great-u/">forward</a></li>						
 										<li><a class="item" href="http://gangwon-fc.com/great-u/free-board/">자유게시판</a></li>						
 									</ul>
 			</div>
@@ -104,10 +104,10 @@ img.emoji {
 					<!--  싱글페이지 헤더 -->
 					<div class="single_headbx">
 						<div class="single_tblbx">
-							<div class="title_bx"><h2 class="single_title"></h2></div>
+							<div class="title_bx"><h2 class="single_title">${articleVO.articleTitle}</h2></div>
 							<div class="meta_bx">
-								<div class="datebx">작성일 : ${article.articleDate}</div>
-								<div class="viewbx">조회수 : ${article.articleHits}</div>
+								<div class="datebx">작성일 : ${articleVO.articleDate}</div>
+								<div class="viewbx">조회수 : ${articleVO.articleHits}</div>
 							</div>
 						</div>
 					</div>
@@ -124,21 +124,22 @@ img.emoji {
 										<!-- .다운로드 -->
 										<div class="single_commentbx">
 						<div class="commentbx">
-							<div class="comment_textbx"><span class="color">{article}.</span>개의 댓글이 달렸습니다.</div>
+							<div class="comment_textbx"><span class="color">${articleVO.articleHits}</span>개의 댓글이 달렸습니다.</div>
 														<div class="comment_textareabx">
 								<form action="http://gangwon-fc.com/wp-admin/admin-ajax.php" method="POST" id="form_comment_write">
 									<input type="hidden" name="write_nonce" value="8e4d70f7da"/>
 									<input type="hidden" name="pid" value="34855">
+									<input type="hidden" name="boardCode" value="${articleVO.boardCode}">
 									<input type="hidden" name="action" value="write_comment">
 									<label class="comment_textarea_label" for="comment_textarea_label">댓글쓰기</label>
 									<textarea id="comment_textarea_label" class="textareabx" name="content" placeholder=""></textarea>
 									<input type="submit" class="submitbx" value="댓글쓰기">
 								</form>
 							</div>
-														<!-- 댓글리스트 -->
+							<!-- 댓글리스트 -->
 							<div class="comment_listbx">
 								<ul>
-																	</ul>
+								</ul>
 							</div>
 							<!-- .댓글리스트 -->
 						</div>
@@ -168,8 +169,8 @@ img.emoji {
 					<div class="list_btnbx">
 						<a href="http://gangwon-fc.com/great-u/free-board/?paged=1" class="list_btn"><span class="text">목록보기</span><i class="icon_item"></i></a>
 												<a href="#;" class="basic_btn mr5 del_btn" data-post-id="34855"><span class="text">삭제</span></a>
-						<a href="/category/free-board/board-modify/34855/" class="basic_btn mr5"><span class="text">수정</span></a>
-											</div>
+						<a href="#" class="basic_btn mr5"><span class="text">수정</span></a>
+					</div>
 					<!-- .목록버튼 -->
 				</div>
 				<!-- .싱글페이지 -->
@@ -223,11 +224,11 @@ jQuery(document).ready(function($){
 			$.ajax({
 				url: admin_ajax,
 				type: 'POST',
-				data: 'action=a_del_write&pid='+pid,
+				data: 'action=/m_detailarticle&articleCode='+articleCode,
 				success: function(data){
 					if(data.success){
-						if(data.go){
-							location.replace(data.go);
+						if(data.location){
+							location.replace(data.location);
 						}
 
 						alert('삭제되었습니다.');

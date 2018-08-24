@@ -10,12 +10,22 @@
 	<meta name="format-detection" content="telephone=no">
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script>
 		(function(html){
 			html.className = html.className.replace(/\bno-js\b/,'js')
 			})(document.documentElement);
 		
-		
+		$(document).ready(function($){
+			/* 동적으로 생성된 게시판의 class에 board를 넣어줘 */
+			$(".board").on("click", function(e){
+				// 누른 게시판의 boardCode를 가져옴
+				var boardCode = $(this).attr('id');
+				//hidden으로 넣어둔 inputbox에 value를 게시판의 boardCode로 set
+				$("input[name='boardCode']").val(boardCode);
+				$("#boardSelect").submit();
+			});
+		});
 		</script>
 <title>Smash Sports Matching</title>
 <link rel='dns-prefetch' href='//code.jquery.com' />
@@ -43,9 +53,6 @@ img.emoji {
      width:60px;
 	cursor:pointer;
 }
-
-
-
 </style>
 <link rel='stylesheet' id='dashicons-css'  href='./resources/css/dashicons.min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='post-views-counter-frontend-css'  href='./resources/css/frontend.css?ver=4.7.3' type='text/css' media='all' />
@@ -72,6 +79,11 @@ img.emoji {
 
 <div id="masthead" class="site-header" role="banner"><!-- site-header-menu 영역 호버시 nav_on 클래스 적용   .search_btn 클릭시 search_on 클래스 적용-->
 			<div class="hover_bg"></div>
+			<!-- 데이터 -->
+			<form role="form" action="m_board" method="GET" id="boardSelect">
+				<input type="hidden" name="boardCode" value="bo2">
+			</form>
+			<!-- 데이터 -->
 			<!-- 서치박스 -->
 			<div class="head_searchbx">
 				<div class="max_container">
@@ -126,8 +138,8 @@ img.emoji {
 							<li class="nav_greatu menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-91">
 							<a href="index.jsp">Home</a>
 							<ul class="sub-menu">
-								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92"><a href="noticeboard.jsp">공지사항</a></li>
-								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-95"><a href="m_board.jsp">자유게시판</a>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-92 board" id="bo2"><a href="#">공지사항</a></li>
+								<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-95 board"><a href="#">자유게시판</a>
 									<ul class="sub-menu">
 										<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-7014"><a href="#">Q&#038;A</a></li>
 								</ul>
@@ -188,23 +200,10 @@ img.emoji {
 			<!-- .하단헤더 -->
 		</div>
 <!-- .헤더 -->
-
-
-
-
 </body>
 
 
 <script>
-/* jQuery(document).ready(function(){
-	
-	jQuery('#logout').click(function(){
-		alert("로그아웃됨");
-		location.href = "logout.jsp";
-		
-	});
-	
-}); */
 
 	
 </script>

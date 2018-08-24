@@ -25,33 +25,52 @@ public class ArticleServiceImpl implements ArticleService{
 	@Inject
 	ArticleViewMapper articleViewMapper;
 	
-	public void addArticle(ArticleDTO articleDTO) {
+	public boolean addArticle(ArticleDTO articleDTO) {
+		if(articleDTO ==null) {
+			return false;
+		}
+		String code = generateCode();
+		articleDTO.setArticleCode(code);
 		try {
 			articleMapper.addArticle(articleDTO);
 		} catch (Exception e) {
 			System.out.println("articleAdd메소드 실패");
 			e.printStackTrace();
 		}
+		return true;
 	}
-	public void updateArticle(ArticleDTO articleDTO) {
+	public boolean updateArticle(ArticleDTO articleDTO) {		
+		if(articleDTO == null) {
+			return false;
+		}
 		try {
 			articleMapper.updateArticleParam(articleDTO);
 		} catch (Exception e) {
 			System.out.println("updateArticle메소드 실패");
 			e.printStackTrace();
 		}
+		return true;
 	}
-	public void deleteArticle(String articleCode) {
+	public boolean deleteArticle(String articleCode) {
+		System.out.println("삭제 매소드 입구 진입햇다");
+		if(articleCode==""||articleCode==null) {
+			return false;
+		}
+		System.out.println("삭제 매소드 진입햇다");
 		try {
 			articleMapper.deleteArticleCode(articleCode);
 		} catch (Exception e) {
 			System.out.println("deleteArticle메소드 실패");
 			e.printStackTrace();
 		}
+		return true;
 	}
 	
 	/* articleCode들을 배열로 받아 해당하는 article들을 삭제 */
-	public void deleteArticles(String[] articleCodes) {
+	public boolean deleteArticles(String[] articleCodes) {
+		if(articleCodes == null) {
+			return false;
+		}
 		List<String> codeList = new ArrayList<String>();
 		for(String articleCode:articleCodes) {
 			codeList.add(articleCode);
@@ -62,6 +81,7 @@ public class ArticleServiceImpl implements ArticleService{
 			System.out.println("deleteArticles메소드 실패!!");
 			e.printStackTrace();
 		}
+		return true;
 	}
 	
 	/* 검색 시 사용 */
@@ -86,7 +106,7 @@ public class ArticleServiceImpl implements ArticleService{
 		}
 		return articles;
 	}
-	/** ?? */
+	/** 게시글 자세히 보기 할 때 사용 */
 	public ArticleVO searchArticle(String articleCode, int flag) {
 		ArticleVO vo = null;
 		try {
@@ -109,7 +129,7 @@ public class ArticleServiceImpl implements ArticleService{
 				code = "ar1";
 			} else{
 				for(ArticleDTO dto:list){
-					System.out.println("여기여기여기:"+dto.getArticleCode().substring(2));
+					dto.getArticleCode().substring(2);
 			        int num = Integer.parseInt(dto.getArticleCode().substring(2));
 					sortMap.put(num, dto);
 				}

@@ -28,8 +28,6 @@ img.emoji {
 	background: none !important;
 	padding: 0 !important;
 }
-
-
 .max_container{
 	width: 100%;
 	text-align:center;
