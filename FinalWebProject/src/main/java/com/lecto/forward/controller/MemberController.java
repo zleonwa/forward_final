@@ -242,12 +242,6 @@ private static final Logger logger = LoggerFactory.getLogger(MemberController.cl
 			e.printStackTrace();
 		}
 	
-		return "/m_mypage";
-	}
-	
-	@RequestMapping(value="/m_modify/cancel", method=RequestMethod.GET)
-	public String cancelUpdateMember() {
-		
 		return "redirect:/m_mypage";
 	}
 
